@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from UserServicesService WSDL service -->
+
+  <service name="UserServices" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://serviceProviders"/>
+      <parameter name="wsdlServiceElement" value="UserServicesService"/>
+      <parameter name="schemaQualified" value="http://vo,http://serviceProviders"/>
+      <parameter name="wsdlServicePort" value="UserServices"/>
+      <parameter name="className" value="serviceProviders.UserServices"/>
+      <parameter name="wsdlPortType" value="UserServices"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://serviceProviders" name="initializeConnectionPool" qname="operNS:initializeConnectionPool" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://serviceProviders" xmlns:retNS="http://serviceProviders" xmlns:rtns="http://vo" name="login" qname="operNS:login" returnQName="retNS:loginReturn" returnType="rtns:UserVo" soapAction="">
+        <parameter xmlns:pns="http://serviceProviders" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:username" type="tns:string"/>
+        <parameter xmlns:pns="http://serviceProviders" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:password" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://serviceProviders" xmlns:retNS="http://serviceProviders" xmlns:rtns="http://vo" name="signUp" qname="operNS:signUp" returnQName="retNS:signUpReturn" returnType="rtns:RequestResult" soapAction="">
+        <parameter xmlns:pns="http://serviceProviders" xmlns:tns="http://vo" qname="pns:newUser" type="tns:UserVo"/>
+      </operation>
+      <parameter name="allowedMethods" value="initializeConnectionPool login signUp"/>
+
+      <typeMapping xmlns:ns="http://vo" qname="ns:UserVo" type="java:vo.UserVo" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://vo" qname="ns:RequestResult" type="java:vo.RequestResult" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
