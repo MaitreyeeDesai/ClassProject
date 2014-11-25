@@ -8,7 +8,8 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
-  ,sql=require('./routes/mysql');
+  , sql=require('./routes/mysql')
+  , contacts=require('./routes/contacts');
 
 var app = express();
 
@@ -31,7 +32,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-
+app.get('/contactTest',contacts.addBulkContacts);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

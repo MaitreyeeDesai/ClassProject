@@ -6,8 +6,8 @@
 // algorithm to decide the effectivity of the subject line for the email 
 var ejs = require("ejs");
 var mysql = require('./mysql');
-var common = require('./common');
-var user = require('./user');
+
+
 
 /**
  * New node file

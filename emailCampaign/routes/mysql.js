@@ -1,6 +1,5 @@
 var ejs = require('ejs');
 var mysql = require('mysql');
-var customPool = require('./customConnectionPooling');
 var pool;
 
 exports.initializeDatabaseConnectionPool = function() {
