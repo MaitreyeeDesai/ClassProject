@@ -5,7 +5,7 @@
 // reference database table: emails
 var ejs = require("ejs");
 var mysql = require('./mysql');
-var sender = require('./emailSender');
+var nodemailer = require('nodemailer');
 
 exports.saveEmailForUser = function(req, res) {
 	var responseString;
@@ -164,5 +164,38 @@ exports.sendEmail = function(req, res) {
 	}
 	var userObject = req.session.user;
 	var senderEmail = userObject.username;
-	sender.sendEmail(email, addressTo, senderEmail, subject);
+	var transporter = nodemailer.createTransport({
+		service : 'gmail',
+		auth : {
+			user : 'maitreyeesunildesai@gmail.com',
+			pass : 'msuniapplications'
+		}
+	});
+	var mailOptions = {
+		from : senderEmail, // sender address
+		to : addressTo, // list of receivers separated by commas
+		subject : subject, // Subject line
+		html : email
+
+	};
+	transporter.sendMail(mailOptions, function(error, info) {
+		if (error) {
+			console.log(error);
+			data = {
+					errorCode : 101,
+					message : "An error occured while sending the email. Please try again."
+				};
+				responseString = JSON.stringify(data);
+				res.send(responseString);
+		} else {
+			console.log('Message sent: ' + info.response);
+			data = {
+					errorCode : 100,
+					message : "The email was sent successfully."
+				};
+				responseString = JSON.stringify(data);
+				res.send(responseString);
+		}
+	});
+
 };
