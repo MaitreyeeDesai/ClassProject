@@ -104,7 +104,7 @@ exports.editEmail = function(req, res) {
 		responseString = JSON.stringify(data);
 		res.send(responseString);
 	} else {
-		var updateQuery = "Update categories Set emailString='" + Email
+		var updateQuery = "Update emails Set emailString='" + Email
 				+ "' where id=" + Eid;
 		mysql
 				.fetchData(
@@ -178,24 +178,60 @@ exports.sendEmail = function(req, res) {
 		html : email
 
 	};
-	transporter.sendMail(mailOptions, function(error, info) {
-		if (error) {
-			console.log(error);
-			data = {
-					errorCode : 101,
-					message : "An error occured while sending the email. Please try again."
-				};
-				responseString = JSON.stringify(data);
-				res.send(responseString);
-		} else {
-			console.log('Message sent: ' + info.response);
-			data = {
-					errorCode : 100,
-					message : "The email was sent successfully."
-				};
-				responseString = JSON.stringify(data);
-				res.send(responseString);
-		}
-	});
+	transporter
+			.sendMail(
+					mailOptions,
+					function(error, info) {
+						if (error) {
+							console.log(error);
+							data = {
+								errorCode : 101,
+								message : "An error occured while sending the email. Please try again."
+							};
+							responseString = JSON.stringify(data);
+							res.send(responseString);
+						} else {
+							console.log('Message sent: ' + info.response);
+							data = {
+								errorCode : 100,
+								message : "The email was sent successfully."
+							};
+							responseString = JSON.stringify(data);
+							res.send(responseString);
+						}
+					});
 
 };
+
+function checkSubjectEffectivity(subjectLine, keywords) {
+	var keywordArray = keywords.split(",");
+	var count = 0;
+	for (var counter = 0; counter < keywordArray.length; counter++) {
+		var word = keywordArray[counter];
+		if (subjectLine.indexOf(word) > -1) {
+			count = count + 1;
+		}
+	}
+	var percent=(count/keywordArray.length)*100;
+	return percent;
+}
+
+exports.checkEmailSubjectLine = function(req, res) {
+	var industryID = req.param("industry-id");
+	var subject = req.param("subject");
+	var responseString;
+	var getQuery = "Select *from industries where Id=" + industryID;
+	mysql.fetchData(function(err, results) {
+
+		if (err) {
+			throw err;
+		} else {
+			var reqObj = results[0];
+			var percentEffectivity= checkSubjectEffectivity(subject,reqObj.keywords);
+			responseString = JSON.stringify(percentEffectivity);
+			res.send(responseString);
+		}
+	}, getQuery);
+
+};
+
