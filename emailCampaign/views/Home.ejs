@@ -7,20 +7,20 @@
     <head>
         <meta charset="utf-8">
         <title>Email Campaign</title>
-        <link rel="shortcut icon" href="images/icon.jpg"/>
+        <link rel="shortcut icon" href="/images/icon.jpg"/>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/font-awesome.css">
-        <link rel="stylesheet" href="css/templatemo_style.css">
-        <link rel="stylesheet" href="css/templatemo_misc.css">
-        <link rel="stylesheet" href="css/flexslider.css">
-        <link rel="stylesheet" href="css/testimonails-slider.css">        
-        <link rel="stylesheet" href="css/contactstable.css">
-        <link rel="stylesheet" href="css/contacts.css">
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/font-awesome.css">
+        <link rel="stylesheet" href="/css/templatemo_style.css">
+        <link rel="stylesheet" href="/css/templatemo_misc.css">
+        <link rel="stylesheet" href="/css/flexslider.css">
+        <link rel="stylesheet" href="/css/testimonails-slider.css">        
+        <link rel="stylesheet" href="/css/contactstable.css">
+        <link rel="stylesheet" href="/css/contacts.css">
 
         <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     </head>
@@ -50,7 +50,7 @@ function OnLoad() {
                             </div>
                             <div class="col-md-6"> 
                             <div class="button-like">
-                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='index.html';">SIGN OUT
+                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='index.ejs';">SIGN OUT
                             </div>
                             </div>
                         </div>
@@ -62,7 +62,7 @@ function OnLoad() {
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="logo">
-                                    <a href="#"><img src="images/FinalLogo.png" title="Email Campaign" alt="Email Campaign" ></a>
+                                    <a href="#"><img src="/images/FinalLogo.png" title="Email Campaign" alt="Email Campaign" ></a>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -112,7 +112,7 @@ $('a:not(:first)').click(function(e){
 
 <div class="page_title">
 <h2>Click Below To Start Creating Your Email</h2>
- <img src="images/under-heading.png" alt="" >
+ <img src="/images/under-heading.png" alt="" >
 <p style="display: block;">Here you can create a New Email.You can also see an outline of all of your Draft Messages and Sent Message and the corresponding performance statistics for each.</p>
 </div>
 <div class="account_section" style="width: 85%; margin: 0 auto; padding-top: 0px;">
@@ -120,11 +120,11 @@ $('a:not(:first)').click(function(e){
     <div class="containerSignup" style="max-width: 400px;">   
     <div class="blog-post">
                                 <div class="contact-thumb">
-                                   <img src="images/email_icon.jpg" alt="" />
+                                   <img src="/images/email_icon.jpg" alt="" />
                                                                   </div>
                                 <div class="contacts-content">
                                     <div class="content-show">
-                                        <h4 style="text-align: center;"><a href="emails.html">Create Email</a></h4>                                        
+                                        <h4 style="text-align: center;"><a href="emails.ejs">Create Email</a></h4>                                        
                                     </div>                                   
                                 </div>
                             </div>
@@ -153,7 +153,7 @@ $('a:not(:first)').click(function(e){
 
 <div class="page_title">
 <h2>Manage Your Contacts</h2>
- <img src="images/under-heading.png" alt="" >
+ <img src="/images/under-heading.png" alt="" >
 <p style="display: block;">Here you can create a new contact list, manage an existing list </p>
 </div>
 
@@ -167,7 +167,7 @@ $('a:not(:first)').click(function(e){
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                   <a href="javascript:makeVisible('ListViewId');"> <img src="images/lists_icon.jpg" alt="" /></a>
+                                   <a href="javascript:makeVisible('ListViewId');"> <img src="/images/lists_icon.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
@@ -180,11 +180,11 @@ $('a:not(:first)').click(function(e){
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                  <a href="CreateList.html"> <img src="images/contacts-icon.png" alt="" /></a>
+                                  <a href="CreateList.ejs"> <img src="/images/contacts-icon.png" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
-                                        <h4><a href="CreateList.html">Create Lists</a></h4>
+                                        <h4><a href="CreateList.ejs">Create Lists</a></h4>
                                         
                                     </div>
                                     
@@ -199,7 +199,7 @@ $('a:not(:first)').click(function(e){
  <h2>Personal Contacts :</h2>
       <table aria-describedby="list_contacts_info" id="list_contacts" data-source="https://app.emailopened.com/lists/1290-personal/contactships.json" class="tableo dataTable" style="width: 100%; ">
 <div class="image-thumb" style="width: 60%;">
-    <img src="images/trash.png" alt="" />
+    <img src="/images/trash.png" alt="" />
     </div>
         <thead>
         <tr role="row" style="color: black;">       
@@ -221,7 +221,7 @@ $('a:not(:first)').click(function(e){
     <td style="text-align: center"><input class="specialTextBox" type="text" id="LName" value="List Name" disabled="disabled"></a></td>
     <td style="text-align: center">###</a></td>
    <div class="button-like">
-   <td style="text-align: center"><button class="medium green1 buttonSign" type="submit" onclick="window.location='ListOverView.html';">View</a></td>             
+   <td style="text-align: center"><button class="medium green1 buttonSign" type="submit" onclick="window.location='ListOverView.ejs';">View</a></td>             
     
     </tr>
     </tbody>
@@ -261,7 +261,7 @@ $('a:not(:first)').click(function(e){
                         <div class="col-md-12">
                          <div class="heading-section">
                                 <h2>Getting Started</h2> 
-                                <img src="images/under-heading.png">                   
+                                <img src="/images/under-heading.png">                   
                                
                                  <br>
                                 <p style="color: #FFA500; font-size: 20px; font-weight: normal;">Welcome to your dashboard!                
@@ -273,11 +273,11 @@ $('a:not(:first)').click(function(e){
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                 <a href="contacts.html">  <img src="images/blogpost1.jpg"></a>
+                                 <a href="contacts.ejs">  <img src="/images/blogpost1.jpg"></a>
                                                                   </div>
                                 <div class="blog-content">
                                     <div class="content-show">
-                                        <h4><a href="contacts.html">Manage Contacts</a></h4>                                        
+                                        <h4><a href="contacts.ejs">Manage Contacts</a></h4>                                        
                                     </div>
                                     
                                 </div>
@@ -286,11 +286,11 @@ $('a:not(:first)').click(function(e){
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                   <a href="emails.html"> <img src="images/blogpost2.jpg" alt="" /></a>
+                                   <a href="emails.ejs"> <img src="/images/blogpost2.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
-                                        <h4><a href="templates.html">Choose Your Template</a></h4>
+                                        <h4><a href="templates.ejs">Choose Your Template</a></h4>
                                     </div>
                                     
                                 </div>
@@ -299,11 +299,11 @@ $('a:not(:first)').click(function(e){
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                  <a href="templates.html"> <img src="images/blogpost3.jpg" alt="" /></a>
+                                  <a href="templates.ejs"> <img src="/images/blogpost3.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
-                                        <h4><a href="emails.html">Draft n Preview Email</a></h4>
+                                        <h4><a href="emails.ejs">Draft n Preview Email</a></h4>
                                         
                                     </div>
                                     

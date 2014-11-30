@@ -7,20 +7,20 @@
     <head>
         <meta charset="utf-8">
         <title>Email Campaign</title>
-        <link rel="shortcut icon" href="images/icon.jpg"/>
+        <link rel="shortcut icon" href="/images/icon.jpg"/>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         
        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/font-awesome.css">
-        <link rel="stylesheet" href="css/templatemo_style.css">
-        <link rel="stylesheet" href="css/templatemo_misc.css">
-        <link rel="stylesheet" href="css/flexslider.css">
-        <link rel="stylesheet" href="css/testimonails-slider.css">        
-        <link rel="stylesheet" href="css/contactstable.css">
-        <link rel="stylesheet" href="css/contacts.css">
+        <link rel="stylesheet" href="/css/bootstrap.css">
+        <link rel="stylesheet" href="/css/font-awesome.css">
+        <link rel="stylesheet" href="/css/templatemo_style.css">
+        <link rel="stylesheet" href="/css/templatemo_misc.css">
+        <link rel="stylesheet" href="/css/flexslider.css">
+        <link rel="stylesheet" href="/css/testimonails-slider.css">        
+        <link rel="stylesheet" href="/css/contactstable.css">
+        <link rel="stylesheet" href="/css/contacts.css">
         <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     </head>
   
@@ -60,7 +60,7 @@ document.getElementById("LName").disabled = false;
                             </div>
                             <div class="col-md-6"> 
                             <div class="button-like">
-                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='index.html';">SIGN OUT
+                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='index.ejs';">SIGN OUT
                             </div>
                             </div>
                         </div>
@@ -73,17 +73,17 @@ document.getElementById("LName").disabled = false;
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="logo">
-                                    <a href="#"><img src="images/FinalLogo.png" title="Email Campaign" alt="Email Campaign" ></a>
+                                    <a href="#"><img src="/images/FinalLogo.png" title="Email Campaign" alt="Email Campaign" ></a>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="main-menu">
                                     <ul>                                       
                                      
-                                       <li><a href="home.html">DASHBOARD</a><li>                                
-                                        <li> <a href="emails.html">EMAILS</a><li>
-                                       <li> <a href="contacts.html">CONTACTS</a><li>
-                                       <li> <a href="templates.html">TEMPLATES</a><li>
+                                       <li><a href="home.ejs">DASHBOARD</a><li>                                
+                                        <li> <a href="emails.ejs">EMAILS</a><li>
+                                       <li> <a href="contacts.ejs">CONTACTS</a><li>
+                                       <li> <a href="templates.ejs">TEMPLATES</a><li>
                                        
                                     </ul>
                                 </div>
@@ -108,7 +108,7 @@ document.getElementById("LName").disabled = false;
 
 <div class="page_title">
 <h2>Manage Your Contacts</h2>
- <img src="images/under-heading.png" alt="" >
+ <img src="/images/under-heading.png" alt="" >
 <p style="display: block;">Here you can create a new contact list, manage an existing list </p>
 </div>
 
@@ -122,7 +122,7 @@ document.getElementById("LName").disabled = false;
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                   <a href="javascript:makeVisible('ListViewId');"> <img src="images/lists_icon.jpg" alt="" /></a>
+                                   <a href="javascript:makeVisible('ListViewId');"> <img src="/images/lists_icon.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
@@ -135,11 +135,11 @@ document.getElementById("LName").disabled = false;
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                  <a href="CreateList.html"> <img src="images/contacts-icon.png" alt="" /></a>
+                                  <a href="CreateList.ejs"> <img src="/images/contacts-icon.png" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
-                                        <h4><a href="CreateList.html">Create Lists</a></h4>
+                                        <h4><a href="CreateList.ejs">Create Lists</a></h4>
                                         
                                     </div>
                                     
@@ -149,21 +149,21 @@ document.getElementById("LName").disabled = false;
             </div>
                           <!--  <div class="blog-post">
                                <div class="contact-thumb">
-                                   <img src="images/lists_icon.jpg" alt="" />
+                                   <img src="/images/lists_icon.jpg" alt="" />
                                                                   </div>
                                 <div class="contacts-content">
                                     <div class="content-show">
-                                      <!--  <h4 style="text-align: center;"><a href="contacts.html">Manage Contacts</a></h4>-->
+                                      <!--  <h4 style="text-align: center;"><a href="contacts.ejs">Manage Contacts</a></h4>-->
                                    <!--     <h4 style="text-align: center;"><a href="javascript:makeVisible('ListViewId');">View Lists</a></h4>                                        
                                     </div>                                   
                                 </div>
                                 <div class="contact-thumb">
-                                   <img src="images/contacts-icon.png" alt="">
+                                   <img src="/images/contacts-icon.png" alt="">
                                                                   </div>
                                 <div class="contacts-content">
                                     <div class="content-show">
-                                      <!--  <h4 style="text-align: center;"><a href="contacts.html">Manage Contacts</a></h4>-->
-                                      <!--  <h4 style="text-align: center;"><a href="CreateList.html">Create Lists</a></h4>                                        
+                                      <!--  <h4 style="text-align: center;"><a href="contacts.ejs">Manage Contacts</a></h4>-->
+                                      <!--  <h4 style="text-align: center;"><a href="CreateList.ejs">Create Lists</a></h4>                                        
                                    <!-- </div>                                   
                                 </div>
                             </div>-->
@@ -192,7 +192,7 @@ document.getElementById("LName").disabled = false;
     <td style="text-align: center">###</a></td>
    <!-- <td style="text-align: center"><a href=" ">test</a></td>-->
    <div class="button-like">
-   <td style="text-align: center"><button class="medium green1 buttonSign" type="submit" onclick="window.location='ListOverView.html';">View</a>
+   <td style="text-align: center"><button class="medium green1 buttonSign" type="submit" onclick="window.location='ListOverView.ejs';">View</a>
     <button class="medium green1 buttonSign" type="button" name="edit" id="edit" value="Disable" onclick="Edit()";>Edit
    </a></td>               </div>
     
