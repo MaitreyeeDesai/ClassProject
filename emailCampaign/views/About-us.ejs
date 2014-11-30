@@ -13,12 +13,12 @@
         
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" href="/css/bootstrap.css">
-        <link rel="stylesheet" href="/css/font-awesome.css">
-        <link rel="stylesheet" href="/css/templatemo_style.css">
-        <link rel="stylesheet" href="/css/templatemo_misc.css">
-        <link rel="stylesheet" href="/css/flexslider.css">
-        <link rel="stylesheet" href="/css/testimonails-slider.css">
+        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/font-awesome.css">
+        <link rel="stylesheet" href="../css/templatemo_style.css">
+        <link rel="stylesheet" href="../css/templatemo_misc.css">
+        <link rel="stylesheet" href="../css/flexslider.css">
+        <link rel="stylesheet" href="../css/testimonails-slider.css">
 
         <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     </head>
@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-6"> 
                             <div class="button-like">
-                            <a href="#" onclick="toggle_visibility('form')">Log In</a>
+                            <button class="medium green1 buttonSign" type="submit" onclick="toggle_visibility('form')" >LOGIN
                             </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                 </form>
 </div>
                   <div  id="signup" class="eo_signup_box" style="left: 1090px; top: 104px; position: absolute; z-index: 5000000; display: none;">
-<form accept-charset="UTF-8" action="Sign-Up.ejs" class="new_company" id="new_company" method="post" novalidate="novalidate">
+<form accept-charset="UTF-8" action="/SignUp" class="new_company" id="new_company" method="post" novalidate="novalidate">
   <input name="utf8" type="hidden" value="?"><input name="authenticity_token" type="hidden" value="V+NVZUiXGK+DtNCEw9AMvJzdM0FR4iK/HCtxR0CiXzg="><input id="company_users_attributes_0_referring_url" name="company[users_attributes][0][referring_url]" type="hidden" value="http://www.emailopened.com"><input id="company_users_attributes_0_validated_signup" name="company[users_attributes][0][validated_signup]" type="hidden" value="false"><input id="company_users_attributes_0_referral_token" name="company[users_attributes][0][referral_token]" type="hidden" value="main_site"><input id="company_users_attributes_0_time_zone" name="company[users_attributes][0][time_zone]" type="hidden" value="America/Los_Angeles">
 <div class="eo_signup_field"><div class="tag">Full Name:</div><div class="field"><input id="company_users_attributes_0_name" name="company[users_attributes][0][name]" size="20" type="text"></div></div>
 <div class="eo_signup_field"><div class="tag">Email:</div><div class="field"><input id="company_users_attributes_0_email" name="company[users_attributes][0][email]" size="20" type="text"></div></div><input id="company_plan_id" name="company[plan_id]" type="hidden" value="6">
@@ -87,9 +87,9 @@
                             <div class="col-md-6">
                                 <div class="main-menu">
                                     <ul>
-                                        <li><a href="Home.ejs">Home</a></li>
-                                        <li><a href="About-us.ejs">About Us</a></li>
-                                        <li><a href="Features.ejs">Features</a></li>
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="/About-us">About Us</a></li>
+                                        <li><a href="/Features">Features</a></li>
                                         <li><a href="#" onclick="toggle_visibility('signup')">Sign Up</a></li>
                                     </ul>
                                 </div>

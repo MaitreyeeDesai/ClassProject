@@ -33,7 +33,19 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/contactTest',contacts.addBulkContacts);
-app.get('/test',contacts.renderTest);
+//get signup view
+app.get('/Sign-up',routes.getSignupPage);
+app.get('/Home',routes.getHome);
+app.get('/About-us',routes.getAboutUs);
+app.get('/Features',routes.getFeatures);
+app.get('/contacts',routes.getContacts);
+app.get('/email',routes.getEmailsPage);
+
+
+//login
+app.post('/Login',user.login);
+app.post('/SignUp',user.register);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
