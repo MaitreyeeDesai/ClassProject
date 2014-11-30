@@ -347,7 +347,8 @@ padding: 0 0 0 0;
 width: 1050%;
 }
 .login-form , .eo_signup_box {
-  left: 1182.84375px; top: 60px; z-index: 5000000; 
+  left: 1056.84375px;
+top: 44px; z-index: 5000000; 
   float: : right;
   display: none;
   margin-left: 50;
@@ -359,6 +360,7 @@ border-radius: 5px;
 background: #efefef;
 text-align: center;
 width: 270px;
+padding-top: 19px;
 }
 .eo-button {
 border-collapse: separate;

@@ -5,22 +5,28 @@ var common = require('./common');
  * GET users listing.
  */
 
+function updateCurrentDateInLoggedInUser (username) {
+	var currentDate = common.FormatDate(new Date(), "%Y-%m-%d %H:%M:%S", false);
+	var updateTime = "Update user SET lastlogin='" + currentDate
+			+ "' where username='" + username + "'";
+
+	mysql.fetchData(function(err, results) {
+		if (err) {
+			throw err;
+		} else {
+			console.log("last login time updated for the user.");
+		}
+
+	}, updateTime);
+}
+
 exports.login = function(req, res) {
 	if (typeof (req.param("password")) === "undefined"
-			|| typeof (req.param("username")) === "undefined") {
-		ejs.renderFile('./views/invalidLogin.ejs', function(err, result) {
-			// render on success
-			if (!err) {
-				res.end(result);
-			}
-			// render or error
-			else {
-				res.end('An error occurred');
-				console.log(err);
-			}
-		});
+			|| typeof (req.param("email")) === "undefined") {
+		console.log("Invalid Login");
+		// some way to show invalid login
 	}
-	var getUser = "select * from user where username='" + req.param("username")
+	var getUser = "select * from user where username='" + req.param("email")
 			+ "'" + " and password='" + req.param("password") + "'";
 
 	// check using the database operations if it is correct
@@ -32,23 +38,11 @@ exports.login = function(req, res) {
 				console.log("valid Login");
 				var loggedInUser = results[0];
 				// on login success update the last login time as current time
-				updateCurrentDateInLoggedInUser(req.param("username"));
-				loggedInUser.lastlogin = common.FormatDate(
-						loggedInUser.lastLogin, "%Y-%m-%d %H:%M:%S", false);
+				updateCurrentDateInLoggedInUser(req.param("email"));
+				loggedInUser.lastlogin = common.FormatDate(loggedInUser.lastlogin, "%Y-%m-%d %H:%M:%S", false);
 				// set the session object
 				req.session.user = loggedInUser;
-				// render the home page
-				// [TODO: Kirthi and sindhura: you will render the home page
-				// here using ejs.renderfile]
-
-			} else {
-
-				console.log("Invalid Login");
-				var message = "Invalid username or password";
-				// [TODO: Kirthi and sindhura:
-				// return the invalid login page: just write the path of the ejs
-				// file in empty string below]
-				ejs.renderFile('', message, function(err, result) {
+				ejs.renderFile('./views/Home.ejs', loggedInUser, function(err, result) {
 					// render on success
 					if (!err) {
 						res.end(result);
@@ -60,17 +54,20 @@ exports.login = function(req, res) {
 					}
 				});
 
+			} else {
+				console.log("Invalid Login");
+
 			}
 		}
 	}, getUser);
 
-}
+};
 
 exports.logout = function(req, res) {
 	req.session.destroy();
-	res.redirect("/")
+	res.redirect("/");
 
-}
+};
 
 exports.register = function(req, res) {
 	var data;
@@ -111,13 +108,23 @@ exports.register = function(req, res) {
 		responseString = JSON.stringify(data);
 		res.send(responseString);
 	}
+	var username = req.param("username");
+	if (username == null || typeof (username) == 'undefined') {
+		data = {
+			errorCode : 101,
+			message : "Username requried for sucessful registration"
+		};
+		responseString = JSON.stringify(data);
+		res.send(responseString);
+	}
 	var todaysDate = common.FormatDate(new Date(), "%Y-%m-%d %H:%M:%S", true);
 	var newUserData = {
 		fname : Fname,
 		lname : Lname,
-		username : Email,
+		username : username,
 		password : Password,
-		lastlogin : todaysDate
+		lastlogin : todaysDate,
+		email : Email
 	};
 	mysql.insertData(function(err, results) {
 		if (err) {
@@ -131,17 +138,3 @@ exports.register = function(req, res) {
 
 };
 
-exports.updateCurrentDateInLoggedInUser = function(username) {
-	var currentDate = common.FormatDate(new Date(), "%Y-%m-%d %H:%M:%S", false);
-	var updateTime = "Update user SET lastlogin='" + currentDate
-			+ "' where username='" + username + "'";
-
-	mysql.fetchData(function(err, results) {
-		if (err) {
-			throw err;
-		} else {
-			console.log("last login time updated for the user.")
-		}
-
-	}, updateTime);
-}

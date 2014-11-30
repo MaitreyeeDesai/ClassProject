@@ -4,12 +4,12 @@
   <title>EmailCampaign.com</title>
   <link rel="shortcut icon" href="images/icon.jpg"/>
   <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="/css/font-awesome.css">
-        <link rel="stylesheet" href="/css/templatemo_style.css">
-        <link rel="stylesheet" href="/css/templatemo_misc.css">
-        <link rel="stylesheet" href="/css/flexslider.css">
-        <link rel="stylesheet" href="/css/testimonails-slider.css">
-        <link rel="stylesheet" href="/css/signup.css">
+        <link rel="stylesheet" href="../css/font-awesome.css">
+        <link rel="stylesheet" href="../css/templatemo_style.css">
+        <link rel="stylesheet" href="../css/templatemo_misc.css">
+        <link rel="stylesheet" href="../css/flexslider.css">
+        <link rel="stylesheet" href="../css/testimonails-slider.css">
+        <link rel="stylesheet" href="../css/signup.css">
 
   
   <script>
@@ -49,7 +49,7 @@ function validateForm() {
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="logo">
-                                    <a href="index.ejs"><img src="images/FinalLogo.png" title="Email Campaign" alt="Email Campaign"></a>
+                                    <a href="/index"><img src="images/FinalLogo.png" title="Email Campaign" alt="Email Campaign"></a>
                                 </div>
                             </div>
                                                       
@@ -61,13 +61,13 @@ function validateForm() {
     <div class="containerSignup" style="max-width: 400px;background: #4c799d;">
         
         <div style="margin-top: 12%;">
-         <!--<h1><a href="index.ejs"><img alt="Roundedlogos-large" src="images/BoldLogo.png" style="width: 330px; margin-bottom: 5px; margin-top: 20px; " /></a></h1>-->
+         <!--<h1><a href="/index"><img alt="Roundedlogos-large" src="images/BoldLogo.png" style="width: 330px; margin-bottom: 5px; margin-top: 20px; " /></a></h1>-->
 
             <div id="main">
     <h2 class="public_title">Create Your Account</h2>
   <h3>No hidden fees, just improved emails and increased profits.</h3>
 
-    <form accept-charset="UTF-8" action="Home.ejs" class="new_company" onsubmit="validateForm()" id="new_company" method="post">
+    <form accept-charset="UTF-8" action="/SignUp" class="new_company" onsubmit="validateForm()" id="new_company" method="post">
       <div style="margin:0;padding:0;display:inline">
      <!-- <input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="f6kU/mp+9ylA1+I5mQP+cQ99U6pdaOj6KRGgHfjLAZg=" />-->
      </div>
@@ -99,7 +99,7 @@ function validateForm() {
 
             <div class="required field"style="width:100%">
                 <label for="password" class="inputText1">Password: </label>
-                <input type='password' id='p1'/>
+                <input type='password' id='p1' name="password"/>
             </div>
              <div class="required field"style="width:100%">
                 <label for="password">Confirm Password:</label>
@@ -124,7 +124,7 @@ function validateForm() {
 </form> <div class="clear"></div>
 </div>
 <div class="helpful_links_new">
-    <a href="/signin">Already have an account?</a>
+    <a href="/">Already have an account?</a>
 </div>
         </div>
         

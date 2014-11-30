@@ -40,6 +40,13 @@ app.get('/About-us',routes.getAboutUs);
 app.get('/Features',routes.getFeatures);
 app.get('/contacts',routes.getContacts);
 app.get('/email',routes.getEmailsPage);
+app.get('/index',routes.getIndexPage);
+app.get('/signin',routes.getSignInPage);
+app.get('/logout',user.logout);
+app.get('/createList',routes.getCreateListView);
+app.get('/templates',routes.getTemplateView);
+app.get('/listOverView',routes.getListOverView);
+
 
 
 //login
