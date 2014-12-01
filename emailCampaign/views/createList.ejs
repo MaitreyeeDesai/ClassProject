@@ -13,20 +13,20 @@
         
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" href="/css/bootstrap.css">
-        <link rel="stylesheet" href="/css/font-awesome.css">
-        <link rel="stylesheet" href="/css/templatemo_style.css">
-        <link rel="stylesheet" href="/css/templatemo_misc.css">
-        <link rel="stylesheet" href="/css/flexslider.css">
-        <link rel="stylesheet" href="/css/testimonails-slider.css">
-        <link rel="stylesheet" href="/css/contacts.css">
-        <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/font-awesome.css">
+        <link rel="stylesheet" href="../css/templatemo_style.css">
+        <link rel="stylesheet" href="../css/templatemo_misc.css">
+        <link rel="stylesheet" href="../css/flexslider.css">
+        <link rel="stylesheet" href="../css/testimonails-slider.css">
+        <link rel="stylesheet" href="../css/contacts.css">
+        <script src="../js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     </head>
   
    <body onload="OnLoad()">
         
         <script type="text/javascript">
-
+	function OnLoad(){}
     function makeManualVisible(id) {
       fileUpload.style.display='none';
              var e = document.getElementById(id);
@@ -49,7 +49,7 @@
                             </div>
                             <div class="col-md-6"> 
                             <div class="button-like">
-                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='index.ejs';">SIGN OUT
+                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='/logout';">SIGN OUT
                             </div>
                             </div>
                         </div>
@@ -68,18 +68,10 @@
                             <div class="col-md-6">
                                 <div class="main-menu">
                                     <ul>                                       
-                                      <!-- <li><a href="Home.ejs">DASHBOARD</a></li>-->
-                                      <!-- <li><a href="#" onclick="DASHBOARD('dashboard')">DASHBOARD</a></li> 
-                                       <li><a href="#" onclick="EMAILS('emails')">EMAILS</a></li>                                      
-                                        <li><a href="#" onclick="toggle_visibility('contacts')">CONTACTS</a></li>
-                                        <li><a href="#" onclick="toggle_visibility('templates')">TEMPLATES</a></li>
-                                        <li><a href="#" onclick="toggle_visibility('signup')">Sign out</a></li>
-                                        -->
-
-                                       <li><a href="Home.ejs" class="active">DASHBOARD</a><li>                                
-                                        <li> <a href="Home.ejs">EMAILS</a><li>
-                                       <li> <a href="Home.ejs">CONTACTS</a><li>
-                                       <li> <a href="Home.ejs">TEMPLATES</a><li>
+                                        <li><a href="/Home">DASHBOARD</a><li>                                
+                                        <li> <a href="/email">EMAILS</a><li>
+                                       <li> <a href="/contacts">CONTACTS</a><li>
+                                       <li> <a href="/templates">TEMPLATES</a><li>
                                        
                                     </ul>
                                 </div>
@@ -115,7 +107,7 @@
 </div>
 <div class="account_section" style="width: 85%; margin: 0 auto; padding-top: 0px;">
 
-<form name= "ContactsForm" accept-charset="UTF-8" action="ListOverView.ejs" class="new_list" enctype="multipart/form-data" id="new_list" method="post">
+<form name= "ContactsForm" accept-charset="UTF-8" action="/createNewList" class="new_list" enctype="multipart/form-data" id="new_list" method="post">
 
   <div style="margin:0;padding:0;display:inline">
     <input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="8a5qeuSe7Zp8gFtPU605xGVFVaDVTcZhIDtJYXGvgy8=">
@@ -127,7 +119,7 @@
   <div class="liststep"><span class="stepcircle yellowback">1</span></div>
   <div id="ListNameId" class="listfield"><h3>Name of the List</h3>
   This Name is visible to your contacts! Please choose an appropriate name.
-    <p><input id="list_name" required name="ListName" size="30" type="text"></p>
+    <p><input id="list_name" required name="group_name" size="30" type="text"></p>
 
     <h6 id="ListNameError" style="display:none;color:#ac0000 ">*Please provide a name for the list</h6>
 
@@ -210,7 +202,7 @@
                     <div style="width: 45%; float: right;">
                       <div class="fileUpload medium yellow button">
                         <span>Upload File</span>
-                        <input class="upload_csv" id="list_document" name="list[document]" type="file" onchange="displayFileName(this)">
+                        <input class="upload_csv" id="list_document" name="contactFile" type="file" onchange="displayFileName(this)">
                       </div>
                     </div>
                   </div>
@@ -223,7 +215,7 @@
  
 <div class="jedit_bottom_bar">  <div style="width: 100%; text-align: right; padding-top: 10px;">
   <a href="Createcontacts.ejs" style="font-size: medium;">Cancel</a> 
-  <input class="fileUpload medium yellow button" name="commit" style="margin-right: 20px; width:12%; font-size: 15px;margin-left: 2%;" type="submit" value="Save List" onclick="addContact()"> 
+  <input class="fileUpload medium yellow button" name="commit" style="margin-right: 20px; width:12%; font-size: 15px;margin-left: 2%;" type="submit" value="Save List" > 
 </div></div>
 
 </form></div>
@@ -245,7 +237,7 @@
         <br>
         <strong>Upload :</strong> Upload your contact lists in CSV or Excel formats.<br><br>
         <strong>Add Manually :</strong> Add 1 Contact per Line with Email and Name separated by a comma.<br>
-        Eg. example@emailopened.com, Bob Opened
+        Eg. example@gmail.com, Bob Opened
       </div>
     </label>
     <br>
@@ -259,7 +251,7 @@
 
      function displayFileName(fileName)
      {
-      var fileName = document.forms["ContactsForm"]["list[document]"].value;
+      var fileName = document.forms["ContactsForm"]["contactFile"].value;
       FileNameId.innerHTML=fileName;
 
      }

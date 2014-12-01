@@ -46,13 +46,14 @@ app.get('/logout',user.logout);
 app.get('/createList',routes.getCreateListView);
 app.get('/templates',routes.getTemplateView);
 app.get('/listOverView',routes.getListOverView);
+app.get('/AddContacts',routes.AddContacts);
 
 
 
 //login
 app.post('/Login',user.login);
 app.post('/SignUp',user.register);
-
+app.post('/createNewList',contacts.createGroup);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

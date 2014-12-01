@@ -54,24 +54,40 @@ exports.getContacts = function(req, res) {
 		res.redirect("/");
 	} else {
 
-		ejs.renderFile('./views/contacts.ejs', user, function(err, result) {
-			// render on success
-			if (!err) {
-				res.end(result);
+		var owned = user.id;
+		console.log(owned);
+		var getQuery = "select *from contactgroup where ownerId=" + owned;
+		mysql.fetchData(function(err, results) {
+			if (err) {
+				throw err;
+			} else {
+				if (typeof (results) == "undefined") {
+					results = new Array();
+
+				}
+				user.contactList = results;
+				ejs.renderFile('./views/contacts.ejs', user, function(err,
+						result) {
+					// render on success
+					if (!err) {
+						res.end(result);
+					}
+					// render or error
+					else {
+						res.end('An error occurred');
+						console.log(err);
+					}
+				});
+
 			}
-			// render or error
-			else {
-				res.end('An error occurred');
-				console.log(err);
-			}
-		});
+		}, getQuery);
+
 	}
 
-	
 };
 
 exports.getEmailsPage = function(req, res) {
-	
+
 	var user = req.session.user;
 	if (typeof (user) == "undefined") {
 		res.redirect("/");
@@ -89,7 +105,7 @@ exports.getEmailsPage = function(req, res) {
 			}
 		});
 	}
-	
+
 };
 
 exports.getIndexPage = function(req, res) {
@@ -115,9 +131,61 @@ exports.getTemplateView = function(req, res) {
 	});
 };
 
-
 exports.getListOverView = function(req, res) {
-	res.render('ListOverView', {
+
+	var listName = req.param("list");
+	var user = req.session.user;
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		var owned = user.id;
+		var getQuery = "select *from contactgroup where ownerId=" + owned
+				+ " and groupName='" + listName + "'";
+		mysql.fetchData(function(err, results) {
+			if (err) {
+				throw err;
+			} else {
+				var list = results[0];
+				var listId = list.id;
+				var getContact = "select *from contacts where groupId="	+ listId;
+				mysql.fetchData(function(err, results) {
+					if (err) {
+						throw err;
+					} else {
+						if(typeof(results)=="undefined")
+							{
+								results=new Array();
+							}
+						user.list=results;
+						
+						ejs.renderFile('./views/ListOverView.ejs', user, function(err, result) {
+							// render on success
+							if (!err) {
+								res.end(result);
+							}
+							// render or error
+							else {
+								res.end('An error occurred');
+								console.log(err);
+							}
+						});
+						
+						
+					}
+				}, getContact);
+
+			}
+		}, getQuery);
+
+	}
+
+	
+};
+
+
+
+exports.AddContacts = function(req, res) {
+	res.render('AddContacts', {
 		title : 'Email campaign'
 	});
 };
