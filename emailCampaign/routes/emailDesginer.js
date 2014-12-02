@@ -22,9 +22,19 @@ exports.saveEmailForUser = function(req, res) {
 		responseString = JSON.stringify(data);
 		res.send(responseString);
 	}
+	var subjectL = req.param("subject");
+	if (subjectL == null || typeof (subjectL) == 'undefined') {
+		data = {
+			errorCode : 101,
+			message : "Please enter a subject line to design your email."
+		};
+		responseString = JSON.stringify(data);
+		res.send(responseString);
+	}
 	var newEmailData = {
 		ownerId : ownedId,
-		emailString : email
+		emailString : email,
+		subjectLine:subjectL
 
 	};
 	mysql
