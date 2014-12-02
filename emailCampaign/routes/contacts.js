@@ -111,75 +111,127 @@ exports.addContact = function(req, res) {
 exports.addBulkContacts = function(req, res) {
 	// [TODO: take the file from the incoming reques]
 	var resdata;
+	var user = req.session.user;
 	var responseString;
-	csv
-			.fromPath(req.files.contactFile.path)
-			.on(
-					"data",
-					function(data) {
-						console.log(data);
+	var connectionString = req.param("ContactConnection");
+	var listName = req.param("listID");
+	var contactList = req.param("manualEntry");
+	var file = req.param("contact-file");
+	if (typeof (contactList) == "undefined") {
+		// file was uploaded
+		csv
+				.fromPath(req.files.contactFile.path)
+				.on(
+						"data",
+						function(data) {
+							console.log(data);
+							var Fname = data[0];
+							var Lname = data[1];
+							var Email = data[2];
 
-						var Fname = data[0];
-						var Lname = data[1];
-						var Email = data[2];
-						var grpName = data[3];
-
-						var getQ = "select *from contactgroup where groupName= '"
-								+ grpName + "'";
-						mysql
-								.fetchData(
-										function(err, results) {
-											if (err) {
-												throw err;
-											} else {
-												if (results.length > 0) {
-													var grpId = results[0].Id;
-													var newContactData = {
-														fname : Fname,
-														lname : Lname,
-														email : Email,
-														groupId : grpId,
-														isRead : 0
-													};
-													mysql
-															.insertData(
-																	function(
-																			err,
-																			results) {
-																		if (err) {
-																			throw err;
-																		} else {
-																			console
-																					.log("new contact registered.");
-																			resdata = {
-																				errorCode : 100,
-																				message : "All your contacts from the file have been recorded."
-																			};
-																			responseString = JSON
-																					.stringify(data);
-																			res
-																					.send(responseString);
-																		}
-
-																	},
-																	newContactData,
-																	"contacts");
+							var getQ = "select *from contactgroup where groupName= '"
+									+ listName + "'";
+							mysql
+									.fetchData(
+											function(err, results) {
+												if (err) {
+													throw err;
 												} else {
-													resdata = {
-														errorCode : 101,
-														message : "Please create the specified group from the file first."
-													};
-													responseString = JSON
-															.stringify(data);
-													res.send(responseString);
+													if (results.length > 0) {
+														var grpId = results[0].id;
+														var owned = user.id;
+														var newContactData = {
+															fname : Fname,
+															lname : Lname,
+															email : Email,
+															groupId : grpId,
+															isRead : 0,
+															ownerId : owned
+														};
+														mysql
+																.insertData(
+																		function(
+																				err,
+																				results) {
+																			if (err) {
+																				throw err;
+																			} else {
+																				console
+																						.log("contacts registered");
+																				var url = "/listOverView?list="
+																						+ listName;
+																				res
+																						.redirect(url);
+																			}
+
+																		},
+																		newContactData,
+																		"contacts");
+													} else {
+														resdata = {
+															errorCode : 101,
+															message : "Please create the specified group from the file first."
+														};
+														responseString = JSON
+																.stringify(data);
+														res
+																.send(responseString);
+													}
+
 												}
+											}, getQ);
 
-											}
-										}, getQ);
+						}).on("end", function() {
+					console.log("done");
+				});
+	} else {
+		// else parse the multi contact string and add the contacts
+		var getQ = "select *from contactgroup where groupName= '" + listName
+				+ "'";
+		mysql.fetchData(function(err, results) {
+			if (err) {
+				throw err;
+			} else {
+				if (results.length > 0) {
+					var contactPairs = contactList.split('\n');
+					for (var each = 0; each < contactPairs.length; each++) {
+						var pair = contactPairs[each];
+						var data = pair.split(',');
+						console.log(data);
+						var Email = data[0];
+						var name = data[1];
+						var grpId = results[0].id;
+						var owned = user.id;
+						var newContactData = {
+							fname : name,
+							lname : name,
+							email : Email,
+							groupId : grpId,
+							isRead : 0,
+							ownerId : owned
+						};
+						mysql.insertData(function(err, results) {
+							if (err) {
+								throw err;
+							} else {
+								console.log("contacts registered");
+								
+							}
 
-					}).on("end", function() {
-				console.log("done");
-			});
+						}, newContactData, "contacts");
+
+					}
+					var url = "/listOverView?list=" + listName;
+					res.redirect(url);
+
+				} else {
+					// error: no such group exists.
+				}
+
+			}
+
+		}, getQ);
+	}
 
 };
 
@@ -247,8 +299,15 @@ exports.createGroup = function(req, res) {
 													} else {
 														if (typeof (contactList) == "undefined") {
 															// file was uploaded
-															csv.fromPath(req.files.contactFile.path).on("data",function(data) {
-																				console.log(data);
+															csv
+																	.fromPath(
+																			req.files.contactFile.path)
+																	.on(
+																			"data",
+																			function(
+																					data) {
+																				console
+																						.log(data);
 																				var Fname = data[0];
 																				var Lname = data[1];
 																				var Email = data[2];
@@ -275,7 +334,7 @@ exports.createGroup = function(req, res) {
 																												email : Email,
 																												groupId : grpId,
 																												isRead : 0,
-																												ownerId:owned
+																												ownerId : owned
 																											};
 																											mysql
 																													.insertData(
@@ -285,16 +344,11 @@ exports.createGroup = function(req, res) {
 																																if (err) {
 																																	throw err;
 																																} else {
-																																	console
-																																			.log("new contact registered.");
-																																	resdata = {
-																																		errorCode : 100,
-																																		message : "All your contacts from the file have been recorded."
-																																	};
-																																	responseString = JSON
-																																			.stringify(data);
+																																	// redirect
+																																	// to
+																																	// lists
 																																	res
-																																			.send(responseString);
+																																			.redirect("/contacts");
 																																}
 
 																															},
@@ -325,78 +379,56 @@ exports.createGroup = function(req, res) {
 
 														} else {
 															// take the input
-															// from contact list
-																				var data=contactList.split(',');
-																				console.log(data);
-																				var Email = data[0];
-																				var name = data[1];
+															// else parse the multi contact string and add the contacts
+															var getQ = "select *from contactgroup where groupName= '" + Gname
+																	+ "' and ownerId="
+																	+ parseInt(owned);
+															mysql.fetchData(function(err, results) {
+																if (err) {
+																	throw err;
+																} else {
+																	if (results.length > 0) {
+																		var contactPairs = contactList.split('\n');
+																		for (var each = 0; each < contactPairs.length; each++) {
+																			var pair = contactPairs[each];
+																			var data = pair.split(',');
+																			console.log(data);
+																			var Email = data[0];
+																			var name = data[1];
+																			var grpId = results[0].id;
+																			var newContactData = {
+																				fname : name,
+																				lname : name,
+																				email : Email,
+																				groupId : grpId,
+																				isRead : 0,
+																				ownerId : owned
+																			};
+																			mysql.insertData(function(err, results) {
+																				if (err) {
+																					throw err;
+																				} else {
+																					console.log("contacts registered");																					
+																				}
 
-																				var getQ = "select *from contactgroup where groupName= '"+ Gname+ "' and ownerId="+ parseInt(owned);
-																				mysql
-																						.fetchData(
-																								function(
-																										err,
-																										results) {
-																									if (err) {
-																										throw err;
-																									} else {
-																										if (results.length > 0) {
-																											var grpId = results[0].id;
-																											var newContactData = {
-																												fname : name,
-																												lname : name,
-																												email : Email,
-																												groupId : grpId,
-																												isRead : 0,
-																												ownerId:owned
-																											};
-																											mysql
-																													.insertData(
-																															function(
-																																	err,
-																																	results) {
-																																if (err) {
-																																	throw err;
-																																} else {
-																																	console
-																																			.log("new contact registered.");
-																																	resdata = {
-																																		errorCode : 100,
-																																		message : "All your contacts from the file have been recorded."
-																																	};
-																																	responseString = JSON
-																																			.stringify(data);
-																																	res
-																																			.send(responseString);
-																																}
+																			}, newContactData, "contacts");
 
-																															},
-																															newContactData,
-																															"contacts");
-																										} else {
-																											resdata = {
-																												errorCode : 101,
-																												message : "Please create the specified group from the file first."
-																											};
-																											responseString = JSON
-																													.stringify(data);
-																											res
-																													.send(responseString);
-																										}
+																		}
+																		var url = "/listOverView?list=" + Gname;
+																		res.redirect(url);
+																		
 
-																									}
-																								},
-																								getQ);
-
-															
+																	} else {
+																		// error: no such group exists.
+																	}
 																	
+																}
 
+															}, getQ);
+															// from contact list
+															
 														}
-														// read from csv string
-														// enter contacts into
-														// the contact table
-														console.log("new group registered.");
-														res.redirect("/contacts");
+														
 													}
 
 												}, newGroupData, "contactgroup");

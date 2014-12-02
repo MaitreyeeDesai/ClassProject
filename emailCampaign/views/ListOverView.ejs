@@ -46,7 +46,7 @@ function OnLoad() {
                             </div>
                             <div class="col-md-6"> 
                             <div class="button-like">
-                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='index.ejs';">SIGN OUT
+                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='/logout';">SIGN OUT
                             </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@ function OnLoad() {
                                      
                                        <li><a href="/Home">DASHBOARD</a><li>                                
                                         <li> <a href="/email">EMAILS</a><li>
-                                       <li> <a href="/contacts">CONTACTS</a><li>
+                                       <li> <a href="/contacts" class="active">CONTACTS</a><li>
                                        <li> <a href="/templates">TEMPLATES</a><li>
                                        
                                     </ul>
@@ -103,12 +103,12 @@ function OnLoad() {
     <div class="containerSignup" style="max-width: 400px;">   
     <div class="blog-post" style=" width: 80%;margin-right: 50%;margin-left: 11%;">
                                 <div class="blog-thumb">
-                                   <a href="/AddContacts">
+                                   <a href="/AddContacts?list=<%=currentList%>">
                                    <img src="/images/contacts-icon.png" alt="" /></a>
                                                                   </div>
                                 <div class="blog-content">
                                     <div class="content-show">
-                                        <h4 style="text-align: center;"><a href="/AddContacts">Add Contacts</a></h4>                                        
+                                        <h4 style="text-align: center;"><a href="/AddContacts?list=<%=currentList%>">Add Contacts</a></h4>                                        
                                     </div>                                   
                                 </div>
                             </div>
@@ -135,7 +135,7 @@ function OnLoad() {
     <!--<td class="">-->
     <!--<input id=" " class="contact_checkbox" data-id=" " type="checkbox"></td>-->
     <td style="text-align: center"><span style="font-weight: bold;"><%=count+1%></span></a></td>
-    <td style="text-align: center"><%=curObj.fname%> <%=curObj.lname%></a></td>
+    <td style="text-align: center"><%=curObj.fname%></a></td>
     <td style="text-align: center"><%=curObj.email%></a></td>
       <div class="button-like">
                   </div>

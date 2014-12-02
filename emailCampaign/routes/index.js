@@ -92,18 +92,27 @@ exports.getEmailsPage = function(req, res) {
 	if (typeof (user) == "undefined") {
 		res.redirect("/");
 	} else {
-
-		ejs.renderFile('./views/emails.ejs', user, function(err, result) {
-			// render on success
-			if (!err) {
-				res.end(result);
+		var getInd="Select *from industries";
+		mysql.fetchData(function(err, results) {
+			if (err) {
+				throw err;
+			} else {
+				
+				user.industries= results;
+				ejs.renderFile('./views/emails.ejs', user, function(err, result) {
+					// render on success
+					if (!err) {
+						res.end(result);
+					}
+					// render or error
+					else {
+						res.end('An error occurred');
+						console.log(err);
+					}
+				});
 			}
-			// render or error
-			else {
-				res.end('An error occurred');
-				console.log(err);
-			}
-		});
+		}, getInd);
+		
 	}
 
 };
@@ -126,9 +135,24 @@ exports.getCreateListView = function(req, res) {
 };
 
 exports.getTemplateView = function(req, res) {
-	res.render('templates', {
-		title : 'Email campaign'
-	});
+	var user = req.session.user;
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		ejs.renderFile('./views/templates.ejs', user, function(err, result) {
+			// render on success
+			if (!err) {
+				res.end(result);
+			}
+			// render or error
+			else {
+				res.end('An error occurred');
+				console.log(err);
+			}
+		});
+	}
+	
+	
 };
 
 exports.getListOverView = function(req, res) {
@@ -157,7 +181,7 @@ exports.getListOverView = function(req, res) {
 								results=new Array();
 							}
 						user.list=results;
-						
+						user.currentList=listName;
 						ejs.renderFile('./views/ListOverView.ejs', user, function(err, result) {
 							// render on success
 							if (!err) {
@@ -185,7 +209,23 @@ exports.getListOverView = function(req, res) {
 
 
 exports.AddContacts = function(req, res) {
-	res.render('AddContacts', {
-		title : 'Email campaign'
-	});
+	var user = req.session.user;
+	var list=req.param("list");
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		user.listID=list;
+		ejs.renderFile('./views/AddContacts.ejs', user, function(err, result) {
+			// render on success
+			if (!err) {
+				res.end(result);
+			}
+			// render or error
+			else {
+				res.end('An error occurred');
+				console.log(err);
+			}
+		});
+	}
+	
 };

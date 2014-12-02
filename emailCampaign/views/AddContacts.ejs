@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="../css/flexslider.css">
         <link rel="stylesheet" href="../css/testimonails-slider.css">
         <link rel="stylesheet" href="../css/contacts.css">
-        <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+        <script src="../js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     </head>
   
    <body onload="OnLoad()">
@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-md-6"> 
                             <div class="button-like">
-                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='index.ejs';">SIGN OUT
+                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='/logout';">SIGN OUT
                             </div>
                             </div>
                         </div>
@@ -74,10 +74,10 @@
                                         <li><a href="#" onclick="toggle_visibility('signup')">Sign out</a></li>
                                         -->
 
-                                       <li><a href="Home.ejs" class="active">DASHBOARD</a><li>                                
-                                        <li> <a href="emails.ejs">EMAILS</a><li>
-                                       <li> <a href="contacts.ejs">CONTACTS</a><li>
-                                       <li> <a href="Home.ejs">TEMPLATES</a><li>
+                                       <li><a href="/Home">DASHBOARD</a><li>                                
+                                        <li> <a href="/email">EMAILS</a><li>
+                                       <li> <a href="/contacts" class="active">CONTACTS</a><li>
+                                       <li> <a href="/templates">TEMPLATES</a><li>
                                        
                                     </ul>
                                 </div>
@@ -113,7 +113,7 @@
 </div>
 <div class="account_section" style="width: 85%; margin: 0 auto; padding-top: 0px;">
 
-<form name= "ContactsForm" accept-charset="UTF-8" action="ListOverView.ejs" class="new_list" enctype="multipart/form-data" id="new_list" method="post">
+<form name= "ContactsForm" accept-charset="UTF-8" action="/addContact" class="new_list" enctype="multipart/form-data" id="new_contact" method="post">
 
   <div style="margin:0;padding:0;display:inline">
     <input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="8a5qeuSe7Zp8gFtPU605xGVFVaDVTcZhIDtJYXGvgy8=">
@@ -181,7 +181,7 @@
                 <div class="manual_upload_box" style="display: block">
                   <h3>Upload Contacts Manually - Type ONE contact per line</h3>
       Only 2 fields are allowed in the manual upload (email, name). Use CSV or Excel upload option for more detailed lists.
-                  <p id="manualId"><textarea name="manualEntry" cols="40" id="list_multi_contacts" required name="list[multi_contacts]" placeholder="Example: developer@emailopened.com, John Doe" rows="8"></textarea>
+                  <p id="manualId"><textarea name="manualEntry" cols="40" id="list_multi_contacts" required name="multi-contacts" placeholder="Example: developer@emailopened.com, John Doe" rows="8"></textarea>
                      <h6 id="manualError" style="display:none;color:#ac0000 ">*Please provide atleast one contact</h6>
                   </p>
                 </div>
@@ -196,7 +196,7 @@
                     <div style="width: 45%; float: right;">
                       <div class="fileUpload medium yellow button">
                         <span>Upload File</span>
-                        <input class="upload_csv" id="list_document" name="list[document]" type="file" onchange="displayFileName(this)">
+                        <input class="upload_csv" id="list_document" name="contact-file" type="file" onchange="displayFileName(this)">
                       </div>
                     </div>
                   </div>
@@ -211,7 +211,7 @@
   <a href="Createcontacts.ejs" style="font-size: medium;">Cancel</a> 
   <input class="fileUpload medium yellow button" name="commit" style="margin-right: 20px; width:12%; font-size: 15px;margin-left: 2%;" type="submit" value="Save List" onclick="addContact()"> 
 </div></div>
-
+<input type="hidden" value="<%=listID%>" name="listID">
 </form></div>
 
 <div style="display: none; ">
@@ -285,6 +285,7 @@ manualError.style.display='block';
     
     </div>
        
-
+<div class="alert-box error" id="errorMessage"><span id="error-span"></span></div>
+	<div class="alert-box success" id="successMessage"><span id="success-span"></span></div>
     </body>
 </html>
