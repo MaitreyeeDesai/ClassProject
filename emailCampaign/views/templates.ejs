@@ -7,11 +7,13 @@
     <head>
         <meta charset="utf-8">
         <title>Email Campaign</title>
-        <link rel="shortcut icon" href="/images/icon.jpg"/>
+        <link rel="shortcut icon" href="images/icon.jpg"/>
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
 
         <link rel="stylesheet" href="../css/bootstrap.css">
         <link rel="stylesheet" href="../css/font-awesome.css">
@@ -34,6 +36,12 @@ function OnLoad() {
        else
           mydiv.style.display = 'block';
     }
+
+     function makeVisible(id) {
+          var e = document.getElementById(id);
+           e.style.display = 'block';
+    }
+
  
 </script>
 
@@ -46,7 +54,9 @@ function OnLoad() {
                             </div>
                             <div class="col-md-6"> 
                             <div class="button-like">
+
                             <button class="medium green1 buttonSign" type="submit" onclick="window.location='/logout';">SIGN OUT
+
                             </div>
                             </div>
                         </div>
@@ -59,18 +69,21 @@ function OnLoad() {
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="logo">
-                                    <a href="#"><img src="/images/FinalLogo.png" title="Email Campaign" alt="Email Campaign" ></a>
+
+                                    <a href="#"><img src="images/FinalLogo.png" title="Email Campaign" alt="Email Campaign" ></a>
+
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="main-menu">
                                     <ul>                                       
                                      
+
                                        <li><a href="/Home">DASHBOARD</a><li>                                
                                         <li> <a href="/email">EMAILS</a><li>
                                        <li> <a href="/contacts">CONTACTS</a><li>
                                        <li> <a href="/templates" class="active">TEMPLATES</a><li>
-                                       
+                                
                                     </ul>
                                 </div>
                             </div>
@@ -84,16 +97,135 @@ function OnLoad() {
       <div id="yield">
 <div class="header_section" style="background: #D58B28">
   
+
   <h1>Welcome <%=fname%></h1>
+
         
   
   <div style="clear: both; "></div>
   
 </div>
-<div>
-	<h2>Feature under development</h2>
-</div>
 
+
+
+
+
+
+<div class="page_title">
+<h2>Choose Template To Start Creating Your Email</h2>
+ <img src="images/under-heading.png" alt="" >
+<p style="display: block;">Choose one of our templates to send Emails on the Go</p>
+</div>
+<div class="account_section" style="width: 85%; margin: 0 auto; padding-top: 0px;">
+
+ <!-- Email icon part   
+
+ <div class="containerSignup" style="max-width: 400px;">   
+    <div class="blog-post">
+                                <div class="contact-thumb">
+                                   <img src="images/email_icon.jpg" alt="" />
+                                                                  </div>
+                                <div class="contacts-content">
+                                    <div class="content-show" style="cursor:pointer">
+                                        <h4 style="text-align: center;" onclick="makeVisible('dabox_overlay')">Create Email</h4>                                        
+                                    </div>                                   
+                                </div>
+                            </div>
+                            </div>   </div>
+      </div>
+    
+    </div>
+
+    
+    <div id="dabox_overlay" style="display: none;">
+
+<div id="dabox" class="open" style="opacity: 1; width: 500px; height: 381px; margin-top: -190.5px; margin-left: -250px; display:block">
+  <div id="new_email_questions" data-width="500" data-use="/emails/new" class="daboxable">
+
+    <form name="myform"><div align="center">
+    <h1>Email Details<a href="#" title="Close" class="dabox_exit unaction"><i class="icon-remove"></i></a></h1>
+
+    <div class="content" style="display: block; overflow: auto; height: 226px;">
+      <h2>A Little Bit of Info</h2>
+      <p>To help us give you the best suggestions when creating your email please answer the following question &amp; start building!</p>
+          <h4>What industry does this email belong to?</h4>
+
+         <!-- <div style="padding: 0 0 15px 0;"><div class="hidden_select_container">
+            <select id="email_industry" name="email_industry" class="simpleselected" size="2">
+
+              <option value="Ecommerce" selected="">Ecommerce</option>
+              <option value="Event Notification">Event Notification</option>
+              <option value="Publishing">Publishing</option>
+              <option value="Charity">Charity</option>
+              <option value="Business to Business">Business to Business</option>
+              <option value="Business to Consumer">Business to Consumer</option>
+            </select>
+          </div>-->
+
+          <!--<div class="simpleselect" id="simpleselect_email_industry">
+            <div class="placeholder">Ecommerce</div>
+            <div class="options" style="height: auto; overflow-y: visible;">
+            <div class="option">Ecommerce</div>
+            <div class="option">Event Notification</div>
+            <div class="option">Publishing</div>
+            <div class="option">Charity</div><div class="option">Business to Business</div>
+            <div class="option">Business to Consumer</div>
+          </div>
+        </div>--> 
+
+ <!-- Thumbnail part of it -->
+ 
+       <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="blog-post">
+                                <div class="blog-thumb">
+                                 <a href="contacts.html">  <img src="images/blogpost1.jpg"></a>
+                                                                  </div>
+                                <div class="blog-content">
+                                    <div class="content-show">
+                                        <h4><a href="contacts.html">Classic</a></h4>                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="blog-post">
+                                <div class="blog-thumb">
+                                   <a href="emails.html"> <img src="images/blogpost2.jpg" alt="" /></a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="content-show">
+                                        <h4><a href="templates.html">Personal</a></h4>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="blog-post">
+                                <div class="blog-thumb">
+                                  <a href="templates.html"> <img src="images/blogpost3.jpg" alt="" /></a>
+                                </div>
+                                <div class="blog-content">
+                                    <div class="content-show">
+                                        <h4><a href="emails.html">Professional</a></h4>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>       
+
+        <!--populate dropdown from database-->
+
+
+      </div>
+                  
+    </div>
+     </div></div>
+
+  </div>
 <div class="alert-box error" id="errorMessage"><span id="error-span"></span></div>
 	<div class="alert-box success" id="successMessage"><span id="success-span"></span></div>
 </body>
