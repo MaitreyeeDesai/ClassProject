@@ -99,12 +99,13 @@ exports.getEmailsPage = function(req, res) {
 			} else {
 				
 				user.industries= results;
-				var getEmails="SELECT * FROM emails JOIN contactgroup on emails.sentTo= contactgroup.id where emails.ownerId="+user.id;
-				mysql.fetchData(function(err, results) {
+				var getEmails="SELECT subjectLine, groupName FROM emails JOIN contactgroup on emails.sentTo= contactgroup.id where emails.ownerId="+user.id;
+				mysql.fetchData(function(err, resultsEmails) {
 					if (err) {
 						throw err;
 					} else {
-						user.historyEmails=results;
+						var test=resultsEmails[0].subjectLine;
+						user.historyEmails=resultsEmails;
 						ejs.renderFile('./views/emails.ejs', user, function(err, result) {
 							// render on success
 							if (!err) {

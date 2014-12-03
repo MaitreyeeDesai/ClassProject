@@ -129,28 +129,30 @@ function OnLoad() {
         <tr role="row" style="color: black;">
         <th colspan="1" rowspan="1" aria-controls="list_contacts" tabindex="0" role="columnheader" class="sorting" style="width: 20px; max-width: 20px; text-align: center;">SUBJECT</th>
         <th colspan="1" rowspan="1" aria-controls="list_contacts" tabindex="0" role="columnheader" class="sorting" style="width: 20px; max-width: 20px; text-align: center">RECIPIENTS</th>
-        <th colspan="1" rowspan="1" aria-controls="list_contacts" tabindex="0" role="columnheader" class="sorting" style="width: 20px; max-width: 20px; text-align: center">OPENED</th>
+        
         
         </tr>
       </thead>
     
 
     <tbody aria-relevant="all" aria-live="polite" role="alert">
-    <tr class="odd">
+    
     
      <% for(var count=0;count < historyEmails.length; count++)  { 
 	   		var curObj=historyEmails[count];
 	   			  	
 	%>
-		<td style="text-align: center"><%curObj.subjectLine%></a></td>
-    <td style="text-align: center"><%curObj.groupName%></a></td>
-    <td style="text-align: center"># of clicks</a></td>  
+		<tr class="odd">
+				<td style="text-align: center"><%curObj.subjectLine%></a></td>
+	    		<td style="text-align: center"><%curObj.groupName%></a></td>
+	    		  
+	    </td>               </div>
+	    
+	    </tr>
 	<%}%>
      
    
-    </td>               </div>
     
-    </tr>
     </tbody>
     </table>
     </div>
