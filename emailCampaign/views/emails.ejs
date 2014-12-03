@@ -143,8 +143,8 @@ function OnLoad() {
 	   			  	
 	%>
 		<tr class="odd">
-				<td style="text-align: center"><%curObj.subjectLine%></a></td>
-	    		<td style="text-align: center"><%curObj.groupName%></a></td>
+				<td style="text-align: center"><%=curObj.subjectLine%></a></td>
+	    		<td style="text-align: center"><%=curObj.groupName%></a></td>
 	    		  
 	    </td>               </div>
 	    
@@ -197,7 +197,7 @@ function OnLoad() {
     </div>
     <div class="actions" style="display: block; overflow: auto;">
 
-          <a href="/emails" class="unaction">Cancel</a> <a href="/createEmailPage?industry=6" class="large yellow button action" id="target_href">Start to Build Email &nbsp; </a>
+          <a href="/email" class="unaction">Cancel</a> <a href="/createEmailPage?industry=6" class="large yellow button action" id="target_href">Start to Build Email &nbsp; </a>
 
     </div>
   </div></div></div>
