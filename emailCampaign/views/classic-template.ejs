@@ -388,7 +388,36 @@ function OnLoad() {
 	</td>
 </tr>
 </table>  	   			     	 
+<span value="Send" style="margin-left: 35%;width: 30%;font-size: 15px;"class="medium green1 buttonSign" onclick="makeVisible('dabox_overlay')">Send</span>
+     <div id="dabox_overlay" style="display: none;">
 
+<div id="dabox" class="open" style="opacity: 1; width: 500px; height: 381px; margin-top: -190.5px; margin-left: -250px; display:block">
+  <div id="new_email_questions" data-width="500" data-use="/emails/new" class="daboxable">
+
+    <form name="myform"><div align="center">
+    <h1>Email Details<a href="#" title="Close" class="dabox_exit unaction"><i class="icon-remove"></i></a></h1>
+
+    <div class="content" style="display: block; overflow: auto; height: 226px;">
+      <h2>A Little Bit of Info</h2>
+      <p>To help us give you the best suggestions when creating your email please answer these few questions &amp; start building!</p>
+          <h4>What industry does this email belong to?</h4>
+
+                  
+        <select name="Industry" size="1" >
+<option selected="selected" value="1">First Choice</option>
+<option value="2">Second Choice</option>
+<option value="3">Third Choice</option>
+<option value="4">Fourth Choice</option>
+<option value="5">Fifth Choice</option>
+<option value="6">Six Choice</option>
+</select>
+
+     </div>
+                  
+    </div>
+    <div class="actions" style="display: block; overflow: auto;">
+          <a href="#" class="unaction">Cancel</a> <a href="#" class="large yellow button action">Start to Build Email &nbsp; </a>
+    </div>
 </body>
 </html>
 

@@ -41,6 +41,10 @@ function OnLoad() {
           var e = document.getElementById(id);
            e.style.display = 'block';
     }
+  function setIndustryValue()
+    {
+    	var ind=$("#selectedInd").val();
+    }
  
 </script>
 
@@ -209,9 +213,11 @@ function OnLoad() {
                                     </table>
                                     
                                     
-                                    <input type="submit" valign="middle" width="624" value="Send Email"  id="sendToServer">
+
+                                    <input type="submit" valign="middle" width="624" value="Send Email"  id="sendToServer" class="medium green1 buttonSign">
                                     </div>
                                     </form>
+                                     
                                     
                                     
  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
