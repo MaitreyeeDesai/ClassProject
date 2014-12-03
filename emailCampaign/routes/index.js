@@ -321,7 +321,7 @@ exports.getCreateEmailPage=function(req,res)
 
 				}
 				user.contactList = results;
-				user.industry=1;
+				user.industry=industry;
 				ejs.renderFile('./views/CreateEmail.ejs', user, function(err, result) {
 					// render on success
 					if (!err) {
