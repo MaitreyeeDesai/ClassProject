@@ -29,6 +29,7 @@
         <script type="text/javascript">
 function OnLoad() {
   var mydiv = document.getElementById('dashboard');
+  document.getElementById("save").style.visibility="hidden";
      if(mydiv.style.display == 'block')
           mydiv.style.display = 'none';
        else
@@ -39,13 +40,10 @@ function OnLoad() {
           var e = document.getElementById(id);
            e.style.display = 'block';
     }
-    function Edit()
+    
+ function Save()
     {
-        if(LName.value!="")
-        {
-document.getElementById("LName").disabled = false;
-
-        }
+        window.alert("saved successfully to the database!!!");
     }
  
 </script>
@@ -172,7 +170,11 @@ document.getElementById("LName").disabled = false;
 <div id="ListViewId" style="display:none;">
  <h2>Personal Contacts :</h2>
       <table aria-describedby="list_contacts_info" id="list_contacts" data-source="https://app.emailopened.com/lists/1290-personal/contactships.json" class="tableo dataTable" style="width: 100%; ">
-
+    
+    <div class="image-thumb" style="width: 60%;">
+    <img src="images/trash.png" alt="" />
+    <button class="medium green1 buttonSign" type="button" name="Save" id="save" value="Disable" onclick="Save()";>Save</button>
+    </div>
        <thead>
         <tr role="row" style="color: black;">
         <th colspan="1" rowspan="1" aria-controls="list_contacts" tabindex="0" role="columnheader" class="sorting" style="width: 20px; max-width: 20px; text-align: center;">S.No</th>
@@ -219,6 +221,17 @@ document.getElementById("LName").disabled = false;
     </tbody>
     </table>
 </div>
+<script type="text/javascript">
+function Edit()
+{
+if(LName.value!="")
+{
+document.getElementById("LName").disabled = false;
+document.getElementById("save").style.visibility="visible";
+}
+}
+
+</script>
 </div>
       </div>
       <div class="alert-box error" id="errorMessage"><span id="error-span"></span></div>
