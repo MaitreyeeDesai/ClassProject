@@ -53,6 +53,8 @@ app.get('/classicTemplate',routes.getClassicTemplate);
 app.get('/personalTemplate',routes.getPersonalTemplate);
 app.get('/professionalTemplate',routes.getProfessionalTemplate);
 app.get('/createEmailPage',routes.getCreateEmailPage);
+app.get('/createEmailPage',routes.getCreateEmailPage);
+app.get('/createEmailPageTemplate',routes.getSendEmailUsingTemplate);
 
 
 

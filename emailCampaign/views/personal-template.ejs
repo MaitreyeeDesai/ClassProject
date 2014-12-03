@@ -50,11 +50,7 @@ function OnLoad() {
           var e = document.getElementById(id);
            e.style.display = 'block';
                }
- function setIndustryValue()
-    {
-    	var ind=$("#selectedInd").val();
-    }
- 
+  
 </script>
  <header>
                 <div id="top-header">
@@ -120,7 +116,7 @@ function OnLoad() {
 
 <!--Form Starting-->
 <form action="" method="post">
-
+<div id="template">
 <!-- header-->
 
 <!--Header Image-->
@@ -227,13 +223,14 @@ function OnLoad() {
 				 <tr>
 					  <td style="font-size: 1px; height: 10px; line-height: 1px;" height="10" colspan="4"><img src="images/spacer.gif" alt="space" width="25" height="1"></td>
 				  </tr>
-				  <input type="submit" value="Send" class="medium green1 buttonSign" onclick="makeVisible('dabox_overlay')"> 
+				  <input type="button" value="Send" class="medium green1 buttonSign" onclick="makeVisible('dabox_overlay')"> 
 				</table><!-- body -->
 				
 		  	</td>
 		</tr>
     </table>
-        
+        </div>
+        <input type="hidden" id="selectedIndustry" name"industry">
     </form>
      <div id="dabox_overlay" style="display: none;">
 
@@ -268,5 +265,26 @@ function OnLoad() {
      </div>
                   
     </div>
+    <div class="actions" style="display: block; overflow: auto;">
+
+          <a href="/email" class="unaction">Cancel</a> <input type="button" class="large yellow button action" id="target_href" value="Start to Build Email" onclick="doTheFinal()">
+
+    </div>
+  </div></div></div>
+    <div class="alert-box error" id="errorMessage"><span id="error-span"></span></div>
+	<div class="alert-box success" id="successMessage"><span id="success-span"></span></div>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script>
+	
+    function doTheFinal()
+    {
+    	$("#dabox_overlay").attr('display','none');
+    	var ind=$("#selectedInd").val();
+    	$("#selectedIndustry").val(ind);
+    }
+ 
+	</script>
   </body>
 </html>
