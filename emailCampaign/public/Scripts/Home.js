@@ -3,7 +3,7 @@
  */
 $(document).ready(function() {
 	
-	$("body").delegate("#new_contact", "submit", function(ev) {
+	$("body").delegate("#sendEmailForm", "submit", function(ev) {
 		$.ajax({
 			type : $(this).attr('method'),
 			url : $(this).attr('action'),

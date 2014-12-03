@@ -174,12 +174,12 @@ exports.sendEmail = function(req, res) {
 		res.send(responseString);
 	}
 	// get the contacts for the group
-	var getC="Select email from contacts where groupId="+addressTo;
+	var getC="Select * from contacts where groupId="+addressTo;
 	mysql.fetchData(function(err, results) {
 		if (err) {
 			throw err;
 		} else {
-			var emails=results[0];
+			var emails=results[0].email;
 			for(var count=0; count < results.length;count++)
 				{
 					if(count==0)
@@ -188,7 +188,7 @@ exports.sendEmail = function(req, res) {
 						}
 					else
 						{
-						emails=emails+","+result[count];
+						emails=emails+","+results[count].email;
 						}
 					
 				}
@@ -294,3 +294,44 @@ exports.checkEmailSubjectLine = function(req, res) {
 
 };
 
+
+exports.test=function(req,res)
+{
+	var transporter = nodemailer.createTransport({
+		service : 'gmail',
+		auth : {
+			user : 'maitreyeesunildesai@gmail.com',
+			pass : 'msuniapplications'
+		}
+	});
+		var mailOptions = {
+				from : "maitreyeesunildesai@gmail.com", // sender address
+				to : "maitreyeesunildesai@gmail.com", // list of receivers separated by commas
+				subject : "asach", // Subject line
+				html : "<p>Hello world!</p>"
+
+			};
+
+		transporter.sendMail(
+					mailOptions,
+					function(error, info) {
+						if (error) {
+							console.log(error);
+							data = {
+								errorCode : 101,
+								message : "An error occured while sending the email. Please try again."
+							};
+							responseString = JSON.stringify(data);
+							res.send(responseString);
+						} else {
+							console.log('Message sent: ' + info.response);
+							data = {
+								errorCode : 100,
+								message : "The email was sent successfully."
+							};
+							responseString = JSON.stringify(data);
+							res.send(responseString);
+						}
+					});
+
+};

@@ -21,8 +21,9 @@
         <link rel="stylesheet" href="../css/testimonails-slider.css">
         <link rel="stylesheet" href="../css/contacts.css">
         <link rel="stylesheet" href="../css/emails.css"> 
-        <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
-         <script src="js/emails.js"></script>
+        <script src="../js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+         <script src="../js/emails.js"></script>
+         
          <script src="../ckeditor/ckeditor.js"></script>
 
           <style>
@@ -147,7 +148,7 @@ padding-bottom: 12px;}
 </div>
 <div class="account_section" style="width: 85%; margin: 0 auto; padding-top: 0px;">
 
-<form name= "ContactsForm" accept-charset="UTF-8" action="ListOverView.ejs" class="new_list" enctype="multipart/form-data" id="new_list" method="post">
+<form name= "ContactsForm" accept-charset="UTF-8" action="/sendEmail" class="new_list" enctype="multipart/form-data" id="sendEmailForm" method="post">
 
 
   <div class="my_address_field field" style="width: 94%;">
@@ -232,9 +233,12 @@ padding-bottom: 12px;}
 
 
 </div>
+<div class="alert-box error" id="errorMessage"><span id="error-span"></span></div>
+	<div class="alert-box success" id="successMessage"><span id="success-span"></span></div>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+   <script src="../Scripts/Home.js"></script>
   <script type="text/javascript">
    CKEDITOR.replace( 'Email_Content' );
    progVal.innerHTML=progId.value;
