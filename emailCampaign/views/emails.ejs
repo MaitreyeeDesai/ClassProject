@@ -34,6 +34,10 @@ function OnLoad() {
        else
           mydiv.style.display = 'block';
     }
+      function makeVisible(id) {
+          var e = document.getElementById(id);
+           e.style.display = 'block';
+    }
  
 </script>
 
@@ -106,7 +110,7 @@ function OnLoad() {
                                                                   </div>
                                 <div class="contacts-content">
                                     <div class="content-show">
-                                        <h4 style="text-align: center;"><a href="/createEmailPage">Create Email</a></h4>                                        
+                                       <h4 style="text-align: center;" onclick="makeVisible('dabox_overlay')">Create Email</h4>                                       
                                     </div>                                   
                                 </div>
                             </div>
