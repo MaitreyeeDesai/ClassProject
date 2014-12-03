@@ -29,8 +29,14 @@
          #selectable-7 .ui-selecting { background: #707070 ; }
          #selectable-7 .ui-selected { background: #EEEEEE; color: #000000; }
          #selectable-7 { list-style-type: none; margin: 2%; 
-            padding: 0; width: 20%; }
-         #selectable-7 li { margin: 3px; cursor: pointer;font-size: 14px;height: 20px;width: 70%;}
+            padding: 0; width: 94%; }
+        #selectable-7 li {margin: 3px;
+cursor: pointer;
+font-size: 14px;
+width: 100%;
+padding-top: 17px;
+padding-bottom: 12px;}
+        
          .ui-widget-content {
             background: #cedc98;
             border: 1px solid ##A8A8A8;
@@ -100,18 +106,12 @@
                             <div class="col-md-6">
                                 <div class="main-menu">
                                     <ul>                                       
-                                      <!-- <li><a href="Home.ejs">DASHBOARD</a></li>-->
-                                      <!-- <li><a href="#" onclick="DASHBOARD('dashboard')">DASHBOARD</a></li> 
-                                       <li><a href="#" onclick="EMAILS('emails')">EMAILS</a></li>                                      
-                                        <li><a href="#" onclick="toggle_visibility('contacts')">CONTACTS</a></li>
-                                        <li><a href="#" onclick="toggle_visibility('templates')">TEMPLATES</a></li>
-                                        <li><a href="#" onclick="toggle_visibility('signup')">Sign out</a></li>
-                                        -->
+                                      
 
-                                       <li><a href="Home.ejs" class="active">DASHBOARD</a><li>                                
-                                        <li> <a href="emails.ejs">EMAILS</a><li>
-                                       <li> <a href="contacts.ejs">CONTACTS</a><li>
-                                       <li> <a href="Home.ejs">TEMPLATES</a><li>
+                                       <li><a href="/Home">DASHBOARD</a><li>                                
+                                        <li> <a href="/emails" class="active">EMAILS</a><li>
+                                       <li> <a href="/contacts">CONTACTS</a><li>
+                                       <li> <a href="/templates">TEMPLATES</a><li>
                                        
                                     </ul>
                                 </div>
@@ -161,11 +161,14 @@
       <button class="fileUpload medium yellow button" style="margin-right: 20px;font-size: 15px;margin-left: 2%;" onclick="recipientOptions()">Add Recepients</button>
       <button class="fileUpload medium yellow button" id="Done" name="commit" style="margin-right: 20px;font-size: 15px;margin-left: 25%;margin-top: -4.5%; display:none" type="submit" onclick="closeRecipientOptions()">Done</button>
 
-      <div id="ReciepientListId" style="display:none">
+      <div id="ReciepientListId" style="display:none;height: 265px;overflow-y: scroll;">
       <ol id="selectable-7">
-         <li class="ui-widget-content">List 1</li>
-         <li class="ui-widget-content">List 2</li>
-         <li class="ui-widget-content">List 3</li>
+          <% for(var count=0;count < contactList.length; count++)  { 
+	   var curObj=contactList[count];
+	  	
+	%>
+		  <li class="ui-widget-content"><%=curObj.groupName%></li>
+	<%}%>
      </ol>
       
     </div>
@@ -211,8 +214,11 @@
     <div class="cleared"></div>
   </div>
   
-  
-     <textarea style="margin: -15% 5em; border: 1px solid #CACCE0;"  name="EmailBody" cols="40" id="Email_Content" required placeholder="Type Email here" rows="8"></textarea>
+  <div>
+  	<input type="hidden" name="emailType" value="1">
+  	<textarea style="margin: -15% 5em; border: 1px solid #CACCE0;"  name="EmailBody" cols="40" id="Email_Content" required placeholder="Type Email here" rows="8"></textarea>
+  </div>
+     
   
 
  
