@@ -243,46 +243,64 @@ exports.AddContacts = function(req, res) {
 exports.getClassicTemplate=function(req,res)
 {
 	var user = req.session.user;
-	var list=req.param("list");
 	if (typeof (user) == "undefined") {
 		res.redirect("/");
 	} else {
-		user.listID=list;
-		ejs.renderFile('./views/classic-template.ejs', user, function(err, result) {
-			// render on success
-			if (!err) {
-				res.end(result);
+		var getInd="Select *from industries";
+		mysql.fetchData(function(err, results) {
+			if (err) {
+				throw err;
+			} else {
+				
+				user.industries= results;
+				ejs.renderFile('./views/classic-template.ejs', user, function(err, result) {
+					// render on success
+					if (!err) {
+						res.end(result);
+					}
+					// render or error
+					else {
+						res.end('An error occurred');
+						console.log(err);
+					}
+				});
+				
 			}
-			// render or error
-			else {
-				res.end('An error occurred');
-				console.log(err);
-			}
-		});
+		}, getInd);
+		
 	}
-	
+
 
 };
 
 exports.getPersonalTemplate=function(req,res)
 {
 	var user = req.session.user;
-	var list=req.param("list");
 	if (typeof (user) == "undefined") {
 		res.redirect("/");
 	} else {
-		user.listID=list;
-		ejs.renderFile('./views/personal-template.ejs', user, function(err, result) {
-			// render on success
-			if (!err) {
-				res.end(result);
+		var getInd="Select *from industries";
+		mysql.fetchData(function(err, results) {
+			if (err) {
+				throw err;
+			} else {
+				
+				user.industries= results;
+				ejs.renderFile('./views/personal-template.ejs', user, function(err, result) {
+					// render on success
+					if (!err) {
+						res.end(result);
+					}
+					// render or error
+					else {
+						res.end('An error occurred');
+						console.log(err);
+					}
+				});
+				
 			}
-			// render or error
-			else {
-				res.end('An error occurred');
-				console.log(err);
-			}
-		});
+		}, getInd);
+		
 	}
 	
 
@@ -292,22 +310,31 @@ exports.getPersonalTemplate=function(req,res)
 exports.getProfessionalTemplate=function(req,res)
 {
 	var user = req.session.user;
-	var list=req.param("list");
 	if (typeof (user) == "undefined") {
 		res.redirect("/");
 	} else {
-		user.listID=list;
-		ejs.renderFile('./views/professional-template.ejs', user, function(err, result) {
-			// render on success
-			if (!err) {
-				res.end(result);
+		var getInd="Select *from industries";
+		mysql.fetchData(function(err, results) {
+			if (err) {
+				throw err;
+			} else {
+				
+				user.industries= results;
+				ejs.renderFile('./views/professional-template.ejs', user, function(err, result) {
+					// render on success
+					if (!err) {
+						res.end(result);
+					}
+					// render or error
+					else {
+						res.end('An error occurred');
+						console.log(err);
+					}
+				});
+				
 			}
-			// render or error
-			else {
-				res.end('An error occurred');
-				console.log(err);
-			}
-		});
+		}, getInd);
+		
 	}
 	
 
