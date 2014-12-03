@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <title>Email Campaign</title>
-        <link rel="shortcut icon" href="/images/icon.jpg"/>
+        <link rel="shortcut icon" href="../images/icon.jpg"/>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         
@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="../css/testimonails-slider.css">        
         <link rel="stylesheet" href="../css/contactstable.css">
         <link rel="stylesheet" href="../css/contacts.css">
+        <link rel="stylesheet" href="../css/emails.css">
 
         <script src="../js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     </head>
@@ -62,7 +63,7 @@ function OnLoad() {
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="logo">
-                                    <a href="#"><img src="/images/FinalLogo.png" title="Email Campaign" alt="Email Campaign" ></a>
+                                    <a href="#"><img src="../images/FinalLogo.png" title="Email Campaign" alt="Email Campaign" ></a>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -112,27 +113,86 @@ function OnLoad() {
 
 <div class="page_title">
 <h2>Click Below To Start Creating Your Email</h2>
- <img src="/images/under-heading.png" alt="" >
-<p style="display: block;">Here you can create a New Email.You can also see an outline of all of your Draft Messages and Sent Message and the corresponding performance statistics for each.</p>
+ <img src="images/under-heading.png" alt="" >
+<p style="display: block;">Here you can create and send New Email.</p>
 </div>
 <div class="account_section" style="width: 85%; margin: 0 auto; padding-top: 0px;">
 
     <div class="containerSignup" style="max-width: 400px;">   
     <div class="blog-post">
                                 <div class="contact-thumb">
-                                   <img src="/images/email_icon.jpg" alt="" />
+                                   <img src="images/email_icon.jpg" alt="" />
                                                                   </div>
                                 <div class="contacts-content">
-                                    <div class="content-show">
-                                        <h4 style="text-align: center;"><a href="/email">Create Email</a></h4>                                        
+                                    <div class="content-show" style="cursor:pointer">
+                                        <h4 style="text-align: center;" onclick="makeVisible('dabox_overlay')">Create Email</h4>                                        
                                     </div>                                   
                                 </div>
                             </div>
                             </div>   </div>
+                            <!--sindhu-->
+                             <!--sindhu-->
+<div></div></br></br></br></br>
+   <table aria-describedby="list_contacts_info" id="list_contacts" data-source="https://app.emailopened.com/lists/1290-personal/contactships.json" class="tableo dataTable" style="width: 100%; table-layout: auto;">
+
+       <thead>
+        <tr role="row" style="color: black;">
+        <th colspan="1" rowspan="1" aria-controls="list_contacts" tabindex="0" role="columnheader" class="sorting" style="width: 20px; max-width: 20px; text-align: center;">SUBJECT</th>
+        <th colspan="1" rowspan="1" aria-controls="list_contacts" tabindex="0" role="columnheader" class="sorting" style="width: 20px; max-width: 20px; text-align: center">RECIPIENTS</th>
+        <th colspan="1" rowspan="1" aria-controls="list_contacts" tabindex="0" role="columnheader" class="sorting" style="width: 20px; max-width: 20px; text-align: center">OPENED</th>
+        
+        </tr>
+      </thead>
+    
+
+    <tbody aria-relevant="all" aria-live="polite" role="alert">
+    <tr class="odd">
+    <td style="text-align: center">email subject</a></td>
+    <td style="text-align: center"># of recipients</a></td>
+    <td style="text-align: center"># of clicks</a></td>   
+   
+    </td>               </div>
+    
+    </tr>
+    </tbody>
+    </table>
+    </div>
+</div>
       </div>
     
     </div>
-</div>
+
+    
+    <div id="dabox_overlay" style="display: none;">
+
+<div id="dabox" class="open" style="opacity: 1; width: 500px; height: 381px; margin-top: -190.5px; margin-left: -250px; display:block">
+  <div id="new_email_questions" data-width="500" data-use="/emails/new" class="daboxable">
+
+    <form name="myform"><div align="center">
+    <h1>Email Details<a href="#" title="Close" class="dabox_exit unaction"><i class="icon-remove"></i></a></h1>
+
+    <div class="content" style="display: block; overflow: auto; height: 226px;">
+      <h2>A Little Bit of Info</h2>
+      <p>To help us give you the best suggestions when creating your email please answer the following question &amp; start building!</p>
+          <h4>What industry does this email belong to?</h4>
+
+        <select name="Industry" size="1" >
+<option selected="selected" value="1">First Choice</option>
+<option value="2">Second Choice</option>
+<option value="3">Third Choice</option>
+<option value="4">Fourth Choice</option>
+<option value="5">Fifth Choice</option>
+<option value="6">Six Choice</option>
+</select>
+      </div>
+                  
+    </div>
+    <div class="actions" style="display: block; overflow: auto;">
+          <a href="emails.ejs" class="unaction">Cancel</a> <a href="CreateEmail.ejs" class="large yellow button action">Start to Build Email &nbsp; </a>
+    </div>
+  </div></div>
+
+  </div>
 </article>
 
 
@@ -153,7 +213,7 @@ function OnLoad() {
 
 <div class="page_title">
 <h2>Manage Your Contacts</h2>
- <img src="/images/under-heading.png" alt="" >
+ <img src="../images/under-heading.png" alt="" >
 <p style="display: block;">Here you can create a new contact list, manage an existing list </p>
 </div>
 
@@ -167,7 +227,7 @@ function OnLoad() {
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                   <a href="javascript:makeVisible('ListViewId');"> <img src="/images/lists_icon.jpg" alt="" /></a>
+                                   <a href="javascript:makeVisible('ListViewId');"> <img src="../images/lists_icon.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
@@ -180,7 +240,7 @@ function OnLoad() {
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                  <a href="CreateList.ejs"> <img src="/images/contacts-icon.png" alt="" /></a>
+                                  <a href="CreateList.ejs"> <img src="../images/contacts-icon.png" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
@@ -199,7 +259,7 @@ function OnLoad() {
  <h2>Personal Contacts :</h2>
       <table aria-describedby="list_contacts_info" id="list_contacts" data-source="https://app.emailopened.com/lists/1290-personal/contactships.json" class="tableo dataTable" style="width: 100%; ">
 <div class="image-thumb" style="width: 60%;">
-    <img src="/images/trash.png" alt="" />
+    <img src="../images/trash.png" alt="" />
     </div>
         <thead>
         <tr role="row" style="color: black;">       
@@ -261,7 +321,7 @@ function OnLoad() {
                         <div class="col-md-12">
                          <div class="heading-section">
                                 <h2>Getting Started</h2> 
-                                <img src="/images/under-heading.png">                   
+                                <img src="../images/under-heading.png">                   
                                
                                  <br>
                                 <p style="color: #FFA500; font-size: 20px; font-weight: normal;">Welcome to your dashboard!                
@@ -273,7 +333,7 @@ function OnLoad() {
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                 <a href="/contacts">  <img src="/images/blogpost1.jpg"></a>
+                                 <a href="/contacts">  <img src="../images/blogpost1.jpg"></a>
                                                                   </div>
                                 <div class="blog-content">
                                     <div class="content-show">
@@ -286,7 +346,7 @@ function OnLoad() {
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                   <a href="/templates"> <img src="/images/blogpost2.jpg" alt="" /></a>
+                                   <a href="/templates"> <img src="../images/blogpost2.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
@@ -299,7 +359,7 @@ function OnLoad() {
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                  <a href="/email"> <img src="/images/blogpost3.jpg" alt="" /></a>
+                                  <a href="/email"> <img src="../images/blogpost3.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
