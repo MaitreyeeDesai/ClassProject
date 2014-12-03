@@ -306,11 +306,11 @@ exports.getProfessionalTemplate=function(req,res)
 exports.getCreateEmailPage=function(req,res)
 {
 	var user = req.session.user;
-	var list=req.param("list");
+	var industry=req.param("industry");
 	if (typeof (user) == "undefined") {
 		res.redirect("/");
 	} else {
-		user.listID=list;
+		
 		var getQuery = "select *from contactgroup where ownerId=" + user.id;
 		mysql.fetchData(function(err, results) {
 			if (err) {
@@ -321,6 +321,7 @@ exports.getCreateEmailPage=function(req,res)
 
 				}
 				user.contactList = results;
+				user.industry=1;
 				ejs.renderFile('./views/CreateEmail.ejs', user, function(err, result) {
 					// render on success
 					if (!err) {
