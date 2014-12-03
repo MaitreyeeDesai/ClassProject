@@ -137,11 +137,18 @@ function OnLoad() {
 
     <tbody aria-relevant="all" aria-live="polite" role="alert">
     <tr class="odd">
-    <td style="text-align: center">email subject</a></td>
-    <td style="text-align: center"># of recipients</a></td>
-    <td style="text-align: center"># of clicks</a></td>   
+    
+     <% for(var count=0;count < historyEmails.length; count++)  { 
+	   		var curObj=historyEmails[count];
+	   			  	
+	%>
+		<td style="text-align: center"><%curObj.subjectLine%></a></td>
+    <td style="text-align: center"><%curObj.groupName%></a></td>
+    <td style="text-align: center"># of clicks</a></td>  
+	<%}%>
+     
    
-    </td>               </div>
+    </td>               
     
     </tr>
     </tbody>

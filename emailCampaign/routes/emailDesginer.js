@@ -147,6 +147,7 @@ exports.sendEmail = function(req, res) {
 	var responseString;
 	var emailType=req.param("emailType");
 	var subject = req.param("subject");
+	var ind=req.param("selectedIndustry");
 	if (subject == null || typeof (subject) == 'undefined') {
 		data = {
 			errorCode : 101,
@@ -201,8 +202,7 @@ exports.sendEmail = function(req, res) {
 					user : 'maitreyeesunildesai@gmail.com',
 					pass : 'msuniapplications'
 				}
-			});
-			
+			});		
 				
 			var mailOptions = {
 						from : senderEmail, // sender address
@@ -223,13 +223,31 @@ exports.sendEmail = function(req, res) {
 									responseString = JSON.stringify(data);
 									res.send(responseString);
 								} else {
-									console.log('Message sent: ' + info.response);
-									data = {
-										errorCode : 100,
-										message : "The email was sent successfully."
+									
+									var newEmail={
+											
+											ownerId:userObject.id,
+											emailString:email,
+											subjectLine:subject,
+											industry:ind,
+											sentTo:addressTo
 									};
-									responseString = JSON.stringify(data);
-									res.send(responseString);
+									mysql.insertData(function(err, results) {
+												if (err) {
+													console.log("error while saving email.");
+													data = {
+														errorCode : 101,
+														message : "There was some error while saving your email please try again."
+													};
+													responseString = JSON.stringify(data);
+													res.send(responseString);
+												} else {
+													res.redirect("/email");
+												}
+
+											}, newEmail, "emails");
+									
+									
 								}
 							});
 
@@ -281,43 +299,3 @@ exports.checkEmailSubjectLine = function(req, res) {
 };
 
 
-exports.test=function(req,res)
-{
-	var transporter = nodemailer.createTransport({
-		service : 'gmail',
-		auth : {
-			user : 'maitreyeesunildesai@gmail.com',
-			pass : 'msuniapplications'
-		}
-	});
-		var mailOptions = {
-				from : "maitreyeesunildesai@gmail.com", // sender address
-				to : "maitreyeesunildesai@gmail.com", // list of receivers separated by commas
-				subject : "asach", // Subject line
-				html : "<p>Hello world!</p>"
-
-			};
-
-		transporter.sendMail(
-					mailOptions,
-					function(error, info) {
-						if (error) {
-							console.log(error);
-							data = {
-								errorCode : 101,
-								message : "An error occured while sending the email. Please try again."
-							};
-							responseString = JSON.stringify(data);
-							res.send(responseString);
-						} else {
-							console.log('Message sent: ' + info.response);
-							data = {
-								errorCode : 100,
-								message : "The email was sent successfully."
-							};
-							responseString = JSON.stringify(data);
-							res.send(responseString);
-						}
-					});
-
-};

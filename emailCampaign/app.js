@@ -56,7 +56,7 @@ app.get('/createEmailPage',routes.getCreateEmailPage);
 
 
 
-app.get('/sendEmailTest',email.test);
+
 //login
 app.post('/Login',user.login);
 app.post('/SignUp',user.register);

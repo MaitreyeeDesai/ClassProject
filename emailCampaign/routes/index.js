@@ -99,17 +99,26 @@ exports.getEmailsPage = function(req, res) {
 			} else {
 				
 				user.industries= results;
-				ejs.renderFile('./views/emails.ejs', user, function(err, result) {
-					// render on success
-					if (!err) {
-						res.end(result);
+				var getEmails="SELECT * FROM emails JOIN contactgroup on emails.sentTo= contactgroup.id where emails.ownerId="+user.id;
+				mysql.fetchData(function(err, results) {
+					if (err) {
+						throw err;
+					} else {
+						user.historyEmails=results;
+						ejs.renderFile('./views/emails.ejs', user, function(err, result) {
+							// render on success
+							if (!err) {
+								res.end(result);
+							}
+							// render or error
+							else {
+								res.end('An error occurred');
+								console.log(err);
+							}
+						});
 					}
-					// render or error
-					else {
-						res.end('An error occurred');
-						console.log(err);
-					}
-				});
+				}, getEmails);
+				
 			}
 		}, getInd);
 		
