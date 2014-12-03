@@ -229,3 +229,76 @@ exports.AddContacts = function(req, res) {
 	}
 	
 };
+
+exports.getClassicTemplate=function(req,res)
+{
+	var user = req.session.user;
+	var list=req.param("list");
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		user.listID=list;
+		ejs.renderFile('./views/classic-template.ejs', user, function(err, result) {
+			// render on success
+			if (!err) {
+				res.end(result);
+			}
+			// render or error
+			else {
+				res.end('An error occurred');
+				console.log(err);
+			}
+		});
+	}
+	
+
+};
+
+exports.getPersonalTemplate=function(req,res)
+{
+	var user = req.session.user;
+	var list=req.param("list");
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		user.listID=list;
+		ejs.renderFile('./views/personal-template.ejs', user, function(err, result) {
+			// render on success
+			if (!err) {
+				res.end(result);
+			}
+			// render or error
+			else {
+				res.end('An error occurred');
+				console.log(err);
+			}
+		});
+	}
+	
+
+};
+
+
+exports.getProfessionalTemplate=function(req,res)
+{
+	var user = req.session.user;
+	var list=req.param("list");
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		user.listID=list;
+		ejs.renderFile('./views/professional-template.ejs', user, function(err, result) {
+			// render on success
+			if (!err) {
+				res.end(result);
+			}
+			// render or error
+			else {
+				res.end('An error occurred');
+				console.log(err);
+			}
+		});
+	}
+	
+
+};

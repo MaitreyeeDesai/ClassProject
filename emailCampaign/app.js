@@ -48,6 +48,9 @@ app.get('/createList',routes.getCreateListView);
 app.get('/templates',routes.getTemplateView);
 app.get('/listOverView',routes.getListOverView);
 app.get('/AddContacts',routes.AddContacts);
+app.get('/classicTemplate',routes.getClassicTemplate);
+app.get('/personalTemplate',routes.getPersonalTemplate);
+app.get('/professionalTemplate',routes.getProfessionalTemplate);
 
 
 
