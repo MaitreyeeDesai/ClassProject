@@ -215,9 +215,10 @@ exports.sendEmail = function(req, res) {
 
 function checkSubjectEffectivity(subjectLine, keywords) {
 	var keywordArray = keywords.split(",");
+	subjectLine=subjectLine.trim().toLowerCase();
 	var count = 0;
 	for (var counter = 0; counter < keywordArray.length; counter++) {
-		var word = keywordArray[counter];
+		var word = keywordArray[counter].toLowerCase();
 		if (subjectLine.indexOf(word) > -1) {
 			count = count + 1;
 		}
@@ -227,7 +228,7 @@ function checkSubjectEffectivity(subjectLine, keywords) {
 }
 
 exports.checkEmailSubjectLine = function(req, res) {
-	var industryID = req.param("industry-id");
+	var industryID = req.param("industry");
 	var subject = req.param("subject");
 	var responseString;
 	var getQuery = "Select *from industries where Id=" + industryID;
@@ -238,7 +239,13 @@ exports.checkEmailSubjectLine = function(req, res) {
 		} else {
 			var reqObj = results[0];
 			var percentEffectivity= checkSubjectEffectivity(subject,reqObj.keywords);
-			responseString = JSON.stringify(percentEffectivity);
+			var keywordArray = reqObj.keywords.split(",");
+			var suggestion="To inscrease your clicks use words like: "+ keywordArray[0]+","+keywordArray[1]+", "+keywordArray[2];
+			var resultObj={
+					sugg:suggestion,
+					percent:percentEffectivity
+			};
+			responseString = JSON.stringify(resultObj);
 			res.send(responseString);
 		}
 	}, getQuery);

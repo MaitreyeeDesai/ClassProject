@@ -9,7 +9,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , sql=require('./routes/mysql')
-  , contacts=require('./routes/contacts');
+  , contacts=require('./routes/contacts')
+  ,email=require('./routes/emailDesginer');
 
 var app = express();
 
@@ -48,6 +49,10 @@ app.get('/createList',routes.getCreateListView);
 app.get('/templates',routes.getTemplateView);
 app.get('/listOverView',routes.getListOverView);
 app.get('/AddContacts',routes.AddContacts);
+app.get('/classicTemplate',routes.getClassicTemplate);
+app.get('/personalTemplate',routes.getPersonalTemplate);
+app.get('/professionalTemplate',routes.getProfessionalTemplate);
+app.get('/createEmailPage',routes.getCreateEmailPage);
 
 
 
@@ -57,6 +62,7 @@ app.post('/Login',user.login);
 app.post('/SignUp',user.register);
 app.post('/createNewList',contacts.createGroup);
 app.post('/addContact',contacts.addBulkContacts);
+app.post('/getSubjectSuggestions',email.checkEmailSubjectLine);
 
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -229,3 +229,113 @@ exports.AddContacts = function(req, res) {
 	}
 	
 };
+
+exports.getClassicTemplate=function(req,res)
+{
+	var user = req.session.user;
+	var list=req.param("list");
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		user.listID=list;
+		ejs.renderFile('./views/classic-template.ejs', user, function(err, result) {
+			// render on success
+			if (!err) {
+				res.end(result);
+			}
+			// render or error
+			else {
+				res.end('An error occurred');
+				console.log(err);
+			}
+		});
+	}
+	
+
+};
+
+exports.getPersonalTemplate=function(req,res)
+{
+	var user = req.session.user;
+	var list=req.param("list");
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		user.listID=list;
+		ejs.renderFile('./views/personal-template.ejs', user, function(err, result) {
+			// render on success
+			if (!err) {
+				res.end(result);
+			}
+			// render or error
+			else {
+				res.end('An error occurred');
+				console.log(err);
+			}
+		});
+	}
+	
+
+};
+
+
+exports.getProfessionalTemplate=function(req,res)
+{
+	var user = req.session.user;
+	var list=req.param("list");
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		user.listID=list;
+		ejs.renderFile('./views/professional-template.ejs', user, function(err, result) {
+			// render on success
+			if (!err) {
+				res.end(result);
+			}
+			// render or error
+			else {
+				res.end('An error occurred');
+				console.log(err);
+			}
+		});
+	}
+	
+
+};
+
+exports.getCreateEmailPage=function(req,res)
+{
+	var user = req.session.user;
+	var industry=req.param("industry");
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		
+		var getQuery = "select *from contactgroup where ownerId=" + user.id;
+		mysql.fetchData(function(err, results) {
+			if (err) {
+				throw err;
+			} else {
+				if (typeof (results) == "undefined") {
+					results = new Array();
+
+				}
+				user.contactList = results;
+				user.industry=1;
+				ejs.renderFile('./views/CreateEmail.ejs', user, function(err, result) {
+					// render on success
+					if (!err) {
+						res.end(result);
+					}
+					// render or error
+					else {
+						res.end('An error occurred');
+						console.log(err);
+					}
+				});
+
+			}
+		}, getQuery);
+		
+	}
+};
