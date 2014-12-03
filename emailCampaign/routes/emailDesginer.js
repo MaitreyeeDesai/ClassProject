@@ -299,3 +299,160 @@ exports.checkEmailSubjectLine = function(req, res) {
 };
 
 
+exports.sendTemplateEmail = function(req, res) {
+	var data;
+	var responseString;
+	var templateType=req.param("templateType");
+	var subject = req.param("subject");
+	var ind=req.param("selectedIndustry");
+	if (subject == null || typeof (subject) == 'undefined') {
+		data = {
+			errorCode : 101,
+			message : "Please give a subject to your email for increasing the open rate."
+		};
+		responseString = JSON.stringify(data);
+		res.send(responseString);
+	}
+	var addressTo = req.param("addressTo");
+	if (addressTo == null || typeof (addressTo) == 'undefined') {
+		data = {
+			errorCode : 101,
+			message : "Please enter the group of people you wish to send the email to."
+		};
+		responseString = JSON.stringify(data);
+		res.send(responseString);
+	}
+	var email = req.param("EmailBody");
+	if (email == null || typeof (email) == 'undefined') {
+		data = {
+			errorCode : 101,
+			message : "Please select an email template for your email."
+		};
+		responseString = JSON.stringify(data);
+		res.send(responseString);
+	}
+	// get the contacts for the group
+	var getC="Select * from contacts where groupId="+addressTo;
+	mysql.fetchData(function(err, results) {
+		if (err) {
+			throw err;
+		} else {
+			var emails=results[0].email;
+			for(var count=0; count < results.length;count++)
+				{
+					if(count==0)
+						{
+							continue;
+						}
+					else
+						{
+						emails=emails+","+results[count].email;
+						}
+					
+				}
+			
+			var userObject = req.session.user;
+			var senderEmail = userObject.email;
+			var transporter = nodemailer.createTransport({
+				service : 'gmail',
+				auth : {
+					user : 'maitreyeesunildesai@gmail.com',
+					pass : 'msuniapplications'
+				}
+			});		
+			if(templateType==1)
+			{
+					//classic
+				var mailOptions = {
+						from : senderEmail, // sender address
+						to : emails, // list of receivers separated by commas
+						subject : subject, // Subject line
+						html : email,
+						attachments: [{
+					        filename: 'image.png',
+					        path: '/path/to/file',
+					        cid: 'unique@kreata.ee' //same cid value as in the html img src
+					    }]
+					};		
+				
+			}
+			if(templateType==2)
+			{
+				//personal
+				var mailOptions = {
+						from : senderEmail, // sender address
+						to : emails, // list of receivers separated by commas
+						subject : subject, // Subject line
+						html : email,
+						attachments: [{
+					        filename: 'image.png',
+					        path: '/path/to/file',
+					        cid: 'unique@kreata.ee' //same cid value as in the html img src
+					    }]
+					};		
+			
+			}
+			if(templateType==3)
+			{
+				//professional
+				var mailOptions = {
+						from : senderEmail, // sender address
+						to : emails, // list of receivers separated by commas
+						subject : subject, // Subject line
+						html : email,
+						attachments: [{
+					        filename: 'image.png',
+					        path: '/path/to/file',
+					        cid: 'unique@kreata.ee' //same cid value as in the html img src
+					    }]
+					};			
+			
+			}
+				
+				transporter.sendMail(
+							mailOptions,
+							function(error, info) {
+								if (error) {
+									console.log(error);
+									data = {
+										errorCode : 101,
+										message : "An error occured while sending the email. Please try again."
+									};
+									responseString = JSON.stringify(data);
+									res.send(responseString);
+								} else {
+									
+									var newEmail={
+											
+											ownerId:userObject.id,
+											emailString:email,
+											subjectLine:subject,
+											industry:ind,
+											sentTo:addressTo
+									};
+									mysql.insertData(function(err, results) {
+												if (err) {
+													console.log("error while saving email.");
+													data = {
+														errorCode : 101,
+														message : "There was some error while saving your email please try again."
+													};
+													responseString = JSON.stringify(data);
+													res.send(responseString);
+												} else {
+													res.redirect("/email");
+												}
+
+											}, newEmail, "emails");
+									
+									
+								}
+							});
+
+		}
+	}, getC);
+	
+	
+
+
+};
