@@ -3,23 +3,23 @@
  */
 $(document).ready(function() {
 	
-	$("body").delegate("#sendEmailForm", "submit", function(ev) {
-		$.ajax({
-			type : $(this).attr('method'),
-			url : $(this).attr('action'),
-			data : $(this).serialize(),
-			success : function(data) {
-				showRecievedMessage(JSON.parse(data));
-			},
-			error : function(data) {
-				showRecievedMessage(data);
-
-			}
-
-		});
-
-		ev.preventDefault();
-	});
+//	$("body").delegate("#sendEmailForm", "submit", function(ev) {
+//		$.ajax({
+//			type : $(this).attr('method'),
+//			url : $(this).attr('action'),
+//			data : $(this).serialize(),
+//			success : function(data) {
+//				showRecievedMessage(JSON.parse(data));
+//			},
+//			error : function(data) {
+//				showRecievedMessage(data);
+//
+//			}
+//
+//		});
+//
+//		ev.preventDefault();
+//	});
 	
 });
 
