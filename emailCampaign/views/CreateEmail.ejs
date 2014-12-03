@@ -120,10 +120,10 @@
                                         <li><a href="#" onclick="toggle_visibility('signup')">Sign out</a></li>
                                         -->
 
-                                       <li><a href="Home.ejs" class="active">DASHBOARD</a><li>                                
-                                        <li> <a href="emails.ejs">EMAILS</a><li>
-                                       <li> <a href="contacts.ejs">CONTACTS</a><li>
-                                       <li> <a href="Home.ejs">TEMPLATES</a><li>
+                                       <li><a href="/Home">DASHBOARD</a><li>                                
+                                        <li> <a href="/email" class="active">EMAILS</a><li>
+                                       <li> <a href="/contacts">CONTACTS</a><li>
+                                       <li> <a href="/templates" >TEMPLATES</a><li>
                                        
                                     </ul>
                                 </div>
@@ -159,7 +159,7 @@
 </div>
 <div class="account_section" style="width: 85%; margin: 0 auto; padding-top: 0px;">
 
-<form name= "ContactsForm" accept-charset="UTF-8" action="ListOverView.ejs" class="new_list" enctype="multipart/form-data" id="new_list" method="post">
+<form name= "ContactsForm" accept-charset="UTF-8" action="/sendEmail" class="new_list" enctype="multipart/form-data" id="new_list" method="post">
 
 
   <div class="my_address_field field" style="width: 94%;">
@@ -175,9 +175,14 @@
 
       <div id="ReciepientListId" style="display:none">
       <ol id="selectable-7">
-         <li class="ui-widget-content">List 1</li>
-         <li class="ui-widget-content">List 2</li>
-         <li class="ui-widget-content">List 3</li>
+       <% for(var count=0;count < contactList.length; count++)  { 
+	   var curObj=contactList[count];
+	  	
+	%>
+		  <li class="ui-widget-content"><%=curObj.groupName%></li>
+	<%}%>
+       
+         
      </ol>
       
     </div>

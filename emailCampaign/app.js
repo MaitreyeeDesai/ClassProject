@@ -51,6 +51,7 @@ app.get('/AddContacts',routes.AddContacts);
 app.get('/classicTemplate',routes.getClassicTemplate);
 app.get('/personalTemplate',routes.getPersonalTemplate);
 app.get('/professionalTemplate',routes.getProfessionalTemplate);
+app.get('/createEmailPage',routes.getCreateEmailPage);
 
 
 

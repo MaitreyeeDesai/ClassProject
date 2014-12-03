@@ -302,3 +302,39 @@ exports.getProfessionalTemplate=function(req,res)
 	
 
 };
+
+exports.getCreateEmailPage=function(req,res)
+{
+	var user = req.session.user;
+	var list=req.param("list");
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		user.listID=list;
+		var getQuery = "select *from contactgroup where ownerId=" + user.id;
+		mysql.fetchData(function(err, results) {
+			if (err) {
+				throw err;
+			} else {
+				if (typeof (results) == "undefined") {
+					results = new Array();
+
+				}
+				user.contactList = results;
+				ejs.renderFile('./views/CreateEmail.ejs', user, function(err, result) {
+					// render on success
+					if (!err) {
+						res.end(result);
+					}
+					// render or error
+					else {
+						res.end('An error occurred');
+						console.log(err);
+					}
+				});
+
+			}
+		}, getQuery);
+		
+	}
+};
