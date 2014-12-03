@@ -107,26 +107,10 @@ function OnLoad() {
 <div class="account_section" style="width: 85%; margin: 0 auto; padding-top: 0px;">
 
 <!--header content-->
-                                    <div align="center" >
-                                    <table cellspacing="0" border="0" cellpadding="0" width="624" >
-                                        <tr>
-                                            <td>
-                                                <h1 style="color: #333; margin: 0px; font-weight: normal; font-size: 60px; font-family: Helvetica, Arial, sans-serif;">ABC Newsletter</h1>
-                                                <h2 style="color: #333; margin: 0px; font-weight: normal; font-size: 30px; font-family: Helvetica, Arial, sans-serif;">
-                                                    <currentmonthname> <currentyear>
-                                                </h2>
-                                            </td>
-                                            <td id="issue" valign="top" style="background-image: url('images/issue-no.jpg'); background-color: #4b98d7; background-repeat: no-repeat; background-position: top; width: 109px; height: 109px;" bgcolor="#4b98d7">
-                                                <!--number-->
-                                                <table width="104" align="right" border="0" cellspacing="0" cellpadding="0">
-                                                    <tr>
-                                                        <td width="52" height="73" valign="bottom"><img align="right" src="images/no.jpg" width="43" height="35"></td>
-                                                        <td width="52" valign="bottom">
-                                                            <h3 style="margin: 0px; padding:0; font-size: 32px; font-family: Helvetica, Arial, sans-serif; color: #FFF;">12</h3>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <!--/number-->
+                                   <form name="professional" action="/email" method="post" >
+                                    <div align="center" style="border:1px solid black;background:grey;">
+                                   
+                                                
                                             </td>
                                         </tr>
                                     </table>
@@ -135,46 +119,69 @@ function OnLoad() {
                             </tr>
                         </table>
                         <!--/header-->
-                        <!--line break-->
-                        <table cellspacing="0" border="0" cellpadding="0" width="624">
-                            <tr>
-                                <td height="50" valign="middle" width="624"><img src="images/line-break-2.jpg" height="13" width="624" /></td>
-                            </tr>
-                        </table>
-
-                        <!--/line break-->	
+                        
 
 						<!--email content-->
                         <table cellspacing="0" border="0" id="email-content" cellpadding="0" width="624">
                             <tr>
                                 <td>
-                                    <!--section 1: Title/desc-->
+                                    <!--section 1: Top Image-->
                                     <table cellspacing="0" border="0" cellpadding="0" width="624">
                                         <tr>
+
                                             <td>
                                                 <p style="font-size: 17px; line-height: 24px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;"><img src="images/img1.jpg" height="286" alt="image dsc" style="border: solid 1px #FFF; box-shadow: 2px 2px 6px #333; -webkit-box-shadow: 2px 2px 6px #333; -khtml-box-shadow: 2px 2px 6px #333; -moz-box-shadow: 2px 2px 6px #333;" width="622" /></p>
                                                 <p style="font-size: 17px; line-height: 24px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;"><img src="images/spacer-ten.jpg" height="10" width="624" /></p>
-                                                <h2 style="font-size: 36px; font-family: Helvetica, Arial, sans-serif; color: #333 !important; margin: 0px;"> Description</h2>
-                                                <p style="font-size: 17px; line-height: 24px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;">
-                                                	<input type="textarea" name="description" rows="50" cols="100" placeholder="Enter the description here">
 
-                                                </p>
+                                                 
+                                                
+                                            <!--Title part-->
+                                                <input type="text" name="description" style="font-size: 36px; font-family: Helvetica, Arial, sans-serif; color: #333 !important; margin: 0px;" placeholder="Enter Title Here"> 
                                             </td>
                                         </tr>
                                     </table>
-                                    <!--/section 1-->
-                                    <!--line break-->
+
+                                                
+                                    <!--/section 1: Vertical Body slots-->
+                                  <table cellspacing="0" border="0" cellpadding="0" width="624">
+                                        <tr>
+                                            <td>
+                                                
+                                                <img src="images/line-break.jpg" height="10" width="624" />
+                                        <table cellspacing="0" border="0" cellpadding="8" width="100%" style="margin-top: 10px;">
+                                                    <tr>
+                                                        <td valign="top">
+                                                            <p style="font-size: 17px; line-height: 24px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;"><input width="138" type="text" height="108%" style="border: 1px solid rgb(255, 255, 255); height: 500px;" placeholder="Enter content Here"></input></p>   
+                                                        </td>
+                                                        <td valign="top">
+                                                            <p style="font-size: 17px; line-height: 24px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;"><input width="138" type="text" height="108%" style="border: 1px solid rgb(255, 255, 255); height: 500px;" placeholder="Enter content Here"></input></p>   
+                                                        </td>
+                                                        
+                                                    </tr>     
+                                    </table>
+
+
+                                    <!--section 3: Footer-->
+                                
+                                    
                                     <table cellspacing="0" border="0" cellpadding="0" width="624">
                                         <tr>
-                                            <td height="30" valign="middle" width="624"><img src="images/line-break-2.jpg" height="13" width="624" /></td>
+                                            <td height="30" valign="middle" width="624">
+                                                <input type="text" placeholder="Write Footer Here">
+                                            </td>
                                         </tr>
                                     </table>
-                                    <!--/line break-->
+                                    
+
+
+
+
+
                                     <!--section 2: Line of images-->
                                     <table cellspacing="0" border="0" cellpadding="0" width="624">
                                         <tr>
                                             <td>
-                                                <h3 style="font-size: 24px; font-family: Helvetica, Arial, sans-serif; color: #333 !important; margin: 0px;">Featured Item</h3>
+                                               
                                                 <img src="images/line-break.jpg" height="10" width="624" />
                                                 <table cellspacing="0" border="0" cellpadding="8" width="100%" style="margin-top: 10px;">
                                                     <tr>
@@ -204,48 +211,9 @@ function OnLoad() {
                                             </td>
                                         </tr>
                                     </table>
-                                    <!--/section 2-->
-                                    <!--line break-->
-                                    <table cellspacing="0" border="0" cellpadding="0" width="624">
-                                        <tr>
-                                            <td height="30" valign="middle" width="624"><img src="images/line-break-2.jpg" height="13" width="624" /></td>
-                                        </tr>
-                                    </table>
-                                    <!--/line break-->
-                                    <!--section 3: Body-->
-                                     <table cellspacing="0" border="0" cellpadding="0" width="624">
-                                                    <tr>
-                                                        <td valign="top" width="378">
-                                                            <h3 style="font-size: 24px; font-family: Helvetica, Arial, sans-serif; color: #333 !important; margin: 0px;">Here's what we have to say:</h3>
-                                                            <p style="font-size: 17px; line-height: 24px; font-family: Georgia, 'Times New Roman', Times, serif; color: #333; margin: 0px;">Consectetur adipiscing elit. <a href="#" style="color: #4b98d7; text-decoration: none;">
-                                                            <input type="textarea" cols="100" rows="100" placeholder="Enter Body Here">
-                                                            </p>
-                                                        </td>
-                                                        <td valign="top" width="246"><img src="images/img7.jpg" align="right" height="239" alt="img7" style="border: solid 1px #FFF; box-shadow: 2px 2px 6px #333; -webkit-box-shadow: 2px 2px 6px #333; -khtml-box-shadow: 2px 2px 6px #333; -moz-box-shadow: 2px 2px 6px #333; float: right;" width="217" /></td>
-                                                    </tr>
-                                                </table>
-
-                                     <!--line break-->
-                                    <table cellspacing="0" border="0" cellpadding="0" width="624">
-                                        <tr>
-                                            <td height="30" valign="middle" width="624"><img src="images/line-break-2.jpg" height="13" width="624" /></td>
-                                        </tr>
-                                    </table>
-                                    <!--/line break-->
-
-                                    <!--section 3: Body-->
-                                     <table cellspacing="0" border="0" cellpadding="0" width="624">
-                                        <tr>
-                                            <td height="30" valign="middle" width="624">
-                                            	<input type="text" placeholder="Salutation.">
-                                            </td>
-                                        </tr>
-                                    </table>
-                                     <!--line break-->
-                                     <table cellspacing="0" border="0" cellpadding="0" width="624">
-                                        <tr>
-                                            <td height="30" valign="middle" width="624"><img src="images/line-break-2.jpg" height="13" width="624" /></td>
-                                        </tr>
-                                    </table>
-                                    <!--/line break-->
-
+                                    
+                                    
+                                    <input type="submit" valign="middle" width="624" value="Send Email">
+                                    </div>
+                                    </form>
+                                    
