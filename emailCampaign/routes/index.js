@@ -522,9 +522,15 @@ exports.sendTemplateEmail = function(req, res) {
 						html : selectedTemplate,
 						attachments: [{
 					        filename: 'image.png',
-					        path: '/path/to/file',
+					        path: '/public/images/img1.jpg',
 					        cid: 'unique@kreata.ee' //same cid value as in the html img src
-					    }]
+					    },
+					    {
+					        filename: 'image.png',
+					        path: '/public/images/img2.jpg',
+					        cid: 'unique@kreata90.ee' //same cid value as in the html img src
+					    }
+					    ]
 					};			
 			
 			}
