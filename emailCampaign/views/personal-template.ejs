@@ -227,7 +227,7 @@ function OnLoad() {
 				 <tr>
 					  <td style="font-size: 1px; height: 10px; line-height: 1px;" height="10" colspan="4"><img src="images/spacer.gif" alt="space" width="25" height="1"></td>
 				  </tr>
-				  <input type="submit" value="Send" class="medium green1 buttonSign" onclick="makeVisible('dabox_overlay')"> 
+				  
 				</table><!-- body -->
 				
 		  	</td>
@@ -235,6 +235,7 @@ function OnLoad() {
     </table>
         
     </form>
+     <span value="Send" style="width: 30%;font-size: 15px;"class="medium green1 buttonSign" onclick="makeVisible('dabox_overlay')">Send</span>
      <div id="dabox_overlay" style="display: none;">
 
 <div id="dabox" class="open" style="opacity: 1; width: 500px; height: 381px; margin-top: -190.5px; margin-left: -250px; display:block">
@@ -248,25 +249,21 @@ function OnLoad() {
       <p>To help us give you the best suggestions when creating your email please answer these few questions &amp; start building!</p>
           <h4>What industry does this email belong to?</h4>
 
-         
-
-         
-        <select name="Industry" size="1" onchange="setIndustryValue()" id="selectedInd">
-         <% for(var count=0;count < industries.length; count++)  { 
-	   		var curObj=industries[count];
-	   		var isSelected="";
-	   		if(count==0)
-	   		{
-	   			isSelected="selected";
-	   		}
-	  	
-	%>
-	<option value="<%=curObj.id%>" selected="<%=isSelected%>"><%=curObj.industry_name%> </option>
-	<% }%>
-	</select>
+                  
+        <select name="Industry" size="1" >
+<option selected="selected" value="1">First Choice</option>
+<option value="2">Second Choice</option>
+<option value="3">Third Choice</option>
+<option value="4">Fourth Choice</option>
+<option value="5">Fifth Choice</option>
+<option value="6">Six Choice</option>
+</select>
 
      </div>
                   
+    </div>
+    <div class="actions" style="display: block; overflow: auto;">
+          <a href="#" class="unaction">Cancel</a> <a href="#" class="large yellow button action">Start to Build Email &nbsp; </a>
     </div>
   </body>
 </html>
