@@ -55,7 +55,7 @@ padding-bottom: 12px;}
 
     </head>
   
-   <body onload="OnLoad()">
+   <body onload="">
         
         <script type="text/javascript">
 
@@ -148,7 +148,7 @@ padding-bottom: 12px;}
 </div>
 <div class="account_section" style="width: 85%; margin: 0 auto; padding-top: 0px;">
 
-<form name= "ContactsForm" accept-charset="UTF-8" action="/sendEmail" class="new_list" enctype="multipart/form-data" id="sendEmailForm" method="post">
+<form name= "ContactsForm" accept-charset="UTF-8" action="/sendTemplateEmail" class="new_list" enctype="multipart/form-data" id="sendEmailForm" method="post">
 
 
   <div class="my_address_field field" style="width: 94%;">
@@ -189,25 +189,18 @@ padding-bottom: 12px;}
     <p>
       <input id="list_contact_conection" required name="subject" size="30" type="text" style="width: 90%;">
       
-      <div id='analysis' class="txtarea">      
-      <p align="left" style="color: green ;font-size:20; margin-top:1">Subject analysis</p>     
-      <p align="left">Warnings:<p style="color:white; margin-top:1">
+      <div id='analysis' class="txtarea" style="width: 90%;">      
+      <p align="left" style="color: rgb(44, 173, 44);font-weight: bold;font-size: 20px; font-family: serif;">Subject analysis</p>     
+      <p align="left" style="color: rgb(236, 61, 61);font-family: -webkit-body;font-size: 17px;">Warnings:<p style="color:white;font-family: -webkit-body;">
        Make your subject longer.(Ideal length is 38 chars.)</p></p>
-      <p style="color: yellow"> Suggestions:</p>
-
+      <p style="color: yellow; font-family: -webkit-body;font-size: medium;"> Suggestions:</p>
+      <p id="suggest" style="color:white;font-family: -webkit-body;"></p>
       </div>
       
 
-     <div style="";> <progress id="progId" style="margin-left: 92%; margin-top: -2%; float:left"value="0" max="100" 
-    onmouseover="a=document.getElementById('progVal');
-              a.innerHTML=this.value+'%'; 
-              a.style.display='block'
-              analysis.style.display='block'"
- onmouseout="document.getElementById('progVal').style.display='none'
- document.getElementById('analysis').style.display='none'">
+     <div style="";> <progress id="progId" style="margin-left: 92%; margin-top: -2%; float:left"value="0" max="100">
       </progress> 
       <div id="progVal" style=" margin-left: 81%; position:absolute;"></div>
-
     </div>
 <!--</p>-->
      
@@ -217,7 +210,7 @@ padding-bottom: 12px;}
   
   <div>
   	<input type="hidden" name="emailType" value="1">
-  	<input style="margin: -15% 5em; border: 1px solid #CACCE0;"  name="EmailBody" cols="40" id="Email_Content" rows="8" value="<%=template%>">
+  	
   	
   </div>
      
@@ -229,14 +222,14 @@ padding-bottom: 12px;}
   <input class="fileUpload medium yellow button" name="commit" style="margin-right: 20px; width:12%; font-size: 15px;margin-left: 2%;" type="submit" value="Send" onclick="">
    
 </div></div>
-<input type="hidden" value="<%=industry%>" id="industrySelected">
+<input type="hidden" value="<%=industry%>" id="industrySelected" name="selectedIndustry">
 </form></div>
 
 
 </div>
 <div class="alert-box error" id="errorMessage"><span id="error-span"></span></div>
 	<div class="alert-box success" id="successMessage"><span id="success-span"></span></div>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
    <script src="../Scripts/Home.js"></script>
@@ -257,7 +250,7 @@ padding-bottom: 12px;}
                   $( ".ui-selected", this ).each(function() {
                      var index = $( "#selectable-7 li" ).index( this );
                  //  result.append( " #" + ( index + 1 ) );
-                   RecipientId.value+=(index+1)+ "";
+                   RecipientId.value+=(index+1)+ " ";
 
                   });
                }
@@ -279,7 +272,8 @@ padding-bottom: 12px;}
 							success : function(data) {
 								$("#suggest").text(data.sugg);
 								$("#progId").val(data.percent);
-								$("#progVal").html(data.percent+"%");
+								var val=parseInt(data.percent);
+								$("#progVal").html(val+"%");
 							}
 						});
 					}				
@@ -288,8 +282,7 @@ padding-bottom: 12px;}
 				return false;
 			});
             
-         });
-    
+         });    
   </script>
 
       </div>

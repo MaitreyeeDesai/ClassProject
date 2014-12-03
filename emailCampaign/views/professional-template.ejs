@@ -107,7 +107,10 @@ function OnLoad() {
 <div class="account_section" style="width: 85%; margin: 0 auto; padding-top: 0px;">
 
 <!--header content-->
-                                   <form name="professional" action="/email" method="post" >
+                                   <form name="professional" action="/createEmailPageTemplate" method="post" >
+                                   <input type="hidden" id="templateHidden" name="template">
+									<input type="hidden" id="selectedIndustry" name"industry">
+									<input type="hidden" name="TemplateType" value="3">
                                     <div align="center" style="border:1px solid black;background:grey;">
                                    
                                                 
@@ -206,7 +209,23 @@ function OnLoad() {
                                     </table>
                                     
                                     
-                                    <input type="submit" valign="middle" width="624" value="Send Email">
+                                    <input type="submit" valign="middle" width="624" value="Send Email"  id="sendToServer">
                                     </div>
                                     </form>
                                     
+                                    
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script>
+	$(function(){
+    $('#sendToServer').click(function () {
+        var mysave = $('#template').html();
+        $('#templateHidden').val(mysave);
+    });
+	});
+   
+ 
+	</script>
+</body>
+</html>

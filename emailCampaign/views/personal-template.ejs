@@ -115,7 +115,10 @@ function OnLoad() {
 <div class="account_section" style="width: 85%; margin: 0 auto; padding-top: 0px;">
 
 <!--Form Starting-->
-<form action="" method="post">
+<form action="/createEmailPageTemplate" method="post">
+<input type="hidden" id="templateHidden" name="template">
+<input type="hidden" id="selectedIndustry" name"industry">
+<input type="hidden" name="TemplateType" value="1">
 <div id="template">
 <!-- header-->
 
@@ -223,67 +226,39 @@ function OnLoad() {
 				 <tr>
 					  <td style="font-size: 1px; height: 10px; line-height: 1px;" height="10" colspan="4"><img src="images/spacer.gif" alt="space" width="25" height="1"></td>
 				  </tr>
-				  <input type="button" value="Send" class="medium green1 buttonSign" onclick="makeVisible('dabox_overlay')"> 
+				  
+				  <input type="submit" value="send" class="medium green1 buttonSign" id="sendToServer">  
 				</table><!-- body -->
 				
 		  	</td>
 		</tr>
     </table>
         </div>
-        <input type="hidden" id="selectedIndustry" name"industry">
+        
     </form>
-     <div id="dabox_overlay" style="display: none;">
-
-<div id="dabox" class="open" style="opacity: 1; width: 500px; height: 381px; margin-top: -190.5px; margin-left: -250px; display:block">
-  <div id="new_email_questions" data-width="500" data-use="/emails/new" class="daboxable">
-
-    <form name="myform"><div align="center">
-    <h1>Email Details<a href="#" title="Close" class="dabox_exit unaction"><i class="icon-remove"></i></a></h1>
-
-    <div class="content" style="display: block; overflow: auto; height: 226px;">
-      <h2>A Little Bit of Info</h2>
-      <p>To help us give you the best suggestions when creating your email please answer these few questions &amp; start building!</p>
-          <h4>What industry does this email belong to?</h4>
-
-         
-
-         
-        <select name="Industry" size="1" onchange="setIndustryValue()" id="selectedInd">
-         <% for(var count=0;count < industries.length; count++)  { 
-	   		var curObj=industries[count];
-	   		var isSelected="";
-	   		if(count==0)
-	   		{
-	   			isSelected="selected";
-	   		}
-	  	
-	%>
-	<option value="<%=curObj.id%>" selected="<%=isSelected%>"><%=curObj.industry_name%> </option>
-	<% }%>
-	</select>
-
-     </div>
-                  
-    </div>
-    <div class="actions" style="display: block; overflow: auto;">
-
-          <a href="/email" class="unaction">Cancel</a> <input type="button" class="large yellow button action" id="target_href" value="Start to Build Email" onclick="doTheFinal()">
-
-    </div>
-  </div></div></div>
+    
+  </div>
     <div class="alert-box error" id="errorMessage"><span id="error-span"></span></div>
 	<div class="alert-box success" id="successMessage"><span id="success-span"></span></div>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 	<script>
-	
+	$(function(){
+    $('#sendToServer').click(function () {
+        var mysave = $('#template').html();
+        $('#templateHidden').val(mysave);
+    });
+	});
     function doTheFinal()
     {
-    	$("#dabox_overlay").attr('display','none');
     	var ind=$("#selectedInd").val();
+    	var e = document.getElementById("dabox_overlay");
+        e.style.display = 'none';    	
     	$("#selectedIndustry").val(ind);
     }
+    
+    
  
 	</script>
   </body>

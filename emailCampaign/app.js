@@ -66,6 +66,8 @@ app.post('/createNewList',contacts.createGroup);
 app.post('/addContact',contacts.addBulkContacts);
 app.post('/getSubjectSuggestions',email.checkEmailSubjectLine);
 app.post('/sendEmail',email.sendEmail);
+app.post('/sendTemplateEmail',routes.sendTemplateEmail);
+app.post('/createEmailPageTemplate',routes.getSendEmailUsingTemplate);
 
 
 

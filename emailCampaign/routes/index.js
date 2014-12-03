@@ -1,6 +1,7 @@
 var ejs = require("ejs");
 var mysql = require('./mysql');
 var common = require('./common');
+var nodemailer = require('nodemailer');
 /*
  * GET home page.
  */
@@ -239,10 +240,14 @@ exports.AddContacts = function(req, res) {
 	}
 	
 };
-
+var selectedTemplate;
+var selectedTemplateType;
+var industryType;
 exports.getClassicTemplate=function(req,res)
 {
 	var user = req.session.user;
+	selectedTemplateType=2;
+	industryType=4;
 	if (typeof (user) == "undefined") {
 		res.redirect("/");
 	} else {
@@ -276,6 +281,8 @@ exports.getClassicTemplate=function(req,res)
 exports.getPersonalTemplate=function(req,res)
 {
 	var user = req.session.user;
+	industryType=3;
+	selectedTemplateType=1;
 	if (typeof (user) == "undefined") {
 		res.redirect("/");
 	} else {
@@ -310,6 +317,8 @@ exports.getPersonalTemplate=function(req,res)
 exports.getProfessionalTemplate=function(req,res)
 {
 	var user = req.session.user;
+	industryType=2;
+	selectedTemplateType=3;
 	if (typeof (user) == "undefined") {
 		res.redirect("/");
 	} else {
@@ -379,8 +388,9 @@ exports.getCreateEmailPage=function(req,res)
 
 exports.getSendEmailUsingTemplate=function(req,res)
 {
-	var template=req.param("template");	
-	var industry=req.param("industry");
+	selectedTemplate=req.param("template");	
+	selectedTemplateType=req.param("TemplateType");
+	//var industry=6;
 	var user = req.session.user;
 	if (typeof (user) == "undefined") {
 		res.redirect("/");
@@ -396,8 +406,7 @@ exports.getSendEmailUsingTemplate=function(req,res)
 
 				}
 				user.contactList = results;
-				user.industry=industry;
-				user.template=template;
+				user.industry=industryType;
 				ejs.renderFile('./views/CreateEmailUsingTemplate.ejs', user, function(err, result) {
 					// render on success
 					if (!err) {
@@ -416,3 +425,154 @@ exports.getSendEmailUsingTemplate=function(req,res)
 	}
 
 }
+
+
+exports.sendTemplateEmail = function(req, res) {
+	var data;
+	var responseString;
+	//var templateType=req.param("templateType");
+	var subject = req.param("subject");
+	var ind=req.param("selectedIndustry");
+	if (subject == null || typeof (subject) == 'undefined') {
+		data = {
+			errorCode : 101,
+			message : "Please give a subject to your email for increasing the open rate."
+		};
+		responseString = JSON.stringify(data);
+		res.send(responseString);
+	}
+	var addressTo = req.param("addressTo");
+	if (addressTo == null || typeof (addressTo) == 'undefined') {
+		data = {
+			errorCode : 101,
+			message : "Please enter the group of people you wish to send the email to."
+		};
+		responseString = JSON.stringify(data);
+		res.send(responseString);
+	}
+	
+	// get the contacts for the group
+	var getC="Select * from contacts where groupId="+addressTo;
+	mysql.fetchData(function(err, results) {
+		if (err) {
+			throw err;
+		} else {
+			var emails=results[0].email;
+			for(var count=0; count < results.length;count++)
+				{
+					if(count==0)
+						{
+							continue;
+						}
+					else
+						{
+						emails=emails+","+results[count].email;
+						}
+					
+				}
+			
+			var userObject = req.session.user;
+			var senderEmail = userObject.email;
+			var transporter = nodemailer.createTransport({
+				service : 'gmail',
+				auth : {
+					user : 'maitreyeesunildesai@gmail.com',
+					pass : 'msuniapplications'
+				}
+			});		
+			if(selectedTemplateType==1)
+			{
+					//classic
+				var mailOptions = {
+						from : senderEmail, // sender address
+						to : emails, // list of receivers separated by commas
+						subject : subject, // Subject line
+						html : selectedTemplate,
+						attachments: [{
+					        filename: 'image.png',
+					        path: '/path/to/file',
+					        cid: 'unique@kreata.ee' //same cid value as in the html img src
+					    }]
+					};		
+				
+			}
+			if(selectedTemplateType==2)
+			{
+				//personal
+				var mailOptions = {
+						from : senderEmail, // sender address
+						to : emails, // list of receivers separated by commas
+						subject : subject, // Subject line
+						html : selectedTemplate,
+						attachments: [{
+					        filename: 'image.png',
+					        path: '/path/to/file',
+					        cid: 'unique@kreata.ee' //same cid value as in the html img src
+					    }]
+					};		
+			
+			}
+			if(selectedTemplateType==3)
+			{
+				//professional
+				var mailOptions = {
+						from : senderEmail, // sender address
+						to : emails, // list of receivers separated by commas
+						subject : subject, // Subject line
+						html : selectedTemplate,
+						attachments: [{
+					        filename: 'image.png',
+					        path: '/path/to/file',
+					        cid: 'unique@kreata.ee' //same cid value as in the html img src
+					    }]
+					};			
+			
+			}
+				
+				transporter.sendMail(
+							mailOptions,
+							function(error, info) {
+								if (error) {
+									console.log(error);
+									data = {
+										errorCode : 101,
+										message : "An error occured while sending the email. Please try again."
+									};
+									responseString = JSON.stringify(data);
+									res.send(responseString);
+								} else {
+									
+									var newEmail={
+											
+											ownerId:userObject.id,
+											emailString:"",
+											subjectLine:subject,
+											industry:ind,
+											sentTo:addressTo
+									};
+									mysql.insertData(function(err, results) {
+												if (err) {
+													console.log("error while saving email.");
+													data = {
+														errorCode : 101,
+														message : "There was some error while saving your email please try again."
+													};
+													responseString = JSON.stringify(data);
+													res.send(responseString);
+												} else {
+													res.redirect("/email");
+												}
+
+											}, newEmail, "emails");
+									
+									
+								}
+							});
+
+		}
+	}, getC);
+	
+	
+
+
+};
