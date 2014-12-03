@@ -339,3 +339,43 @@ exports.getCreateEmailPage=function(req,res)
 		
 	}
 };
+
+exports.getSendEmailUsingTemplate=function(req,res)
+{
+	var template=req.param("template");	
+	var industry=req.param("industry");
+	var user = req.session.user;
+	if (typeof (user) == "undefined") {
+		res.redirect("/");
+	} else {
+		
+		var getQuery = "select *from contactgroup where ownerId=" + user.id;
+		mysql.fetchData(function(err, results) {
+			if (err) {
+				throw err;
+			} else {
+				if (typeof (results) == "undefined") {
+					results = new Array();
+
+				}
+				user.contactList = results;
+				user.industry=industry;
+				user.template=template;
+				ejs.renderFile('./views/CreateEmailUsingTemplate.ejs', user, function(err, result) {
+					// render on success
+					if (!err) {
+						res.end(result);
+					}
+					// render or error
+					else {
+						res.end('An error occurred');
+						console.log(err);
+					}
+				});
+
+			}
+		}, getQuery);
+		
+	}
+
+}

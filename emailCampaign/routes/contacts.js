@@ -109,7 +109,7 @@ exports.addContact = function(req, res) {
 };
 
 exports.addBulkContacts = function(req, res) {
-	// [TODO: take the file from the incoming reques]
+	
 	var resdata;
 	var user = req.session.user;
 	var responseString;
