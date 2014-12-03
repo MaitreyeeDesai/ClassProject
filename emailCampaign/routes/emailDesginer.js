@@ -154,7 +154,7 @@ exports.sendEmail = function(req, res) {
 		responseString = JSON.stringify(data);
 		res.send(responseString);
 	}
-	var addressTo = req.param("address-to");
+	var addressTo = req.param("addressTo");
 	if (addressTo == null || typeof (addressTo) == 'undefined') {
 		data = {
 			errorCode : 101,

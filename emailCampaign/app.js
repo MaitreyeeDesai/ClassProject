@@ -63,6 +63,8 @@ app.post('/SignUp',user.register);
 app.post('/createNewList',contacts.createGroup);
 app.post('/addContact',contacts.addBulkContacts);
 app.post('/getSubjectSuggestions',email.checkEmailSubjectLine);
+app.post('/sendEmail',email.sendEmail);
+
 
 
 http.createServer(app).listen(app.get('port'), function(){

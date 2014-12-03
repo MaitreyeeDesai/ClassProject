@@ -168,7 +168,7 @@
     <div id="ConnectionId" class="listfield"><h3>Recipients</h3>
       Who would you like to send your message to?<br>
     <p>
-      <input id="RecipientId" required name="ContactConnection" size="30" type="text" style="width: 90%;"></p>
+      <input id="RecipientId" required name="addressTo" size="30" type="text" style="width: 90%;"></p>
 
       <button class="fileUpload medium yellow button" style="margin-right: 20px;font-size: 15px;margin-left: 2%;" onclick="recipientOptions()">Add Recepients</button>
       <button class="fileUpload medium yellow button" id="Done" name="commit" style="margin-right: 20px;font-size: 15px;margin-left: 25%;margin-top: -4.5%; display:none" type="submit" onclick="closeRecipientOptions()">Done</button>
@@ -195,7 +195,7 @@
       The subject of your message is the single, most important aspect to getting your email opened and read. Please use our guide provided to maximize the effectiveness of your subject line(s).<br>
     
     <p>
-      <input id="list_contact_conection" required name="ContactConnection" size="30" type="text" style="width: 90%;">
+      <input id="list_contact_conection" required name="subject" size="30" type="text" style="width: 90%;">
       
       <div id='analysis' class="txtarea">      
       <p align="left" style="color: green ;font-size:20; margin-top:1">Subject analysis</p>     
@@ -220,7 +220,7 @@
 
  
 <div class="jedit_bottom_bar">  <div style="width: 100%; text-align: right; padding-top: 10px;">
-  <a href="CreateEmail.ejs" style="font-size: medium;">Cancel</a> 
+  <a href="/email" style="font-size: medium;">Cancel</a> 
   <input class="fileUpload medium yellow button" name="commit" style="margin-right: 20px; width:12%; font-size: 15px;margin-left: 2%;" type="submit" value="Send" onclick=""> 
 </div></div>
 
