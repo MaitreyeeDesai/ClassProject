@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="../css/contacts.css">
         <link rel="stylesheet" href="../css/emails.css"> 
         <script src="../js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
-         <script src="../js/emails.js"></script>
+        
          
          <script src="../ckeditor/ckeditor.js"></script>
 
@@ -55,7 +55,7 @@ padding-bottom: 12px;}
 
     </head>
   
-   <body onload="OnLoad()">
+   <body onload="">
         
         <script type="text/javascript">
 
@@ -88,7 +88,7 @@ padding-bottom: 12px;}
                             </div>
                             <div class="col-md-6"> 
                             <div class="button-like">
-                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='index.ejs';">SIGN OUT
+                            <button class="medium green1 buttonSign" type="submit" onclick="window.location='/logout';">SIGN OUT
                             </div>
                             </div>
                         </div>
@@ -272,7 +272,8 @@ padding-bottom: 12px;}
 							success : function(data) {
 								$("#suggest").text(data.sugg);
 								$("#progId").val(data.percent);
-								$("#progVal").html(data.percent+"%");
+								var val=parseInt(data.percent);
+								$("#progVal").html(val+"%");
 							}
 						});
 					}				
