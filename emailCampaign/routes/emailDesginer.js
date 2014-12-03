@@ -202,30 +202,16 @@ exports.sendEmail = function(req, res) {
 					pass : 'msuniapplications'
 				}
 			});
-			if(emailType==1)
-				{
-				var mailOptions = {
-						from : senderEmail, // sender address
-						to : emails, // list of receivers separated by commas
-						subject : subject, // Subject line
-						text : email
-
-					};
-
-				}
-			else
-				{
-				var mailOptions = {
+			
+				
+			var mailOptions = {
 						from : senderEmail, // sender address
 						to : emails, // list of receivers separated by commas
 						subject : subject, // Subject line
 						html : email
 
-					};
-
-				}
-						transporter
-					.sendMail(
+					};			
+				transporter.sendMail(
 							mailOptions,
 							function(error, info) {
 								if (error) {
