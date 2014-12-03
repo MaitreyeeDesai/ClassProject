@@ -27,7 +27,8 @@ app.use(express.cookieParser());
 app.use(express.session({secret: 'Ummmhmmmmm'})); 
 app.use(app.router);
 // development only
-if ('development' == app.get('env')) {
+if ('development' == app.get('env')) 
+{
   app.use(express.errorHandler());
 }
 
