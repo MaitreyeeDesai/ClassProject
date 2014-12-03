@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <title>Email Campaign</title>
-        <link rel="shortcut icon" href="/images/icon.jpg"/>
+        <link rel="shortcut icon" href="../images/icon.jpg"/>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         
@@ -71,7 +71,7 @@ function OnLoad() {
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="logo">
-                                    <a href="#"><img src="/images/FinalLogo.png" title="Email Campaign" alt="Email Campaign" ></a>
+                                    <a href="#"><img src="../images/FinalLogo.png" title="Email Campaign" alt="Email Campaign" ></a>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -106,7 +106,7 @@ function OnLoad() {
 
 <div class="page_title">
 <h2>Manage Your Contacts</h2>
- <img src="/images/under-heading.png" alt="" >
+ <img src="../images/under-heading.png" alt="" >
 <p style="display: block;">Here you can create a new contact list, manage an existing list </p>
 </div>
 
@@ -120,7 +120,7 @@ function OnLoad() {
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                   <a href="javascript:makeVisible('ListViewId');"> <img src="/images/lists_icon.jpg" alt="" /></a>
+                                   <a href="javascript:makeVisible('ListViewId');"> <img src="../images/lists_icon.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
@@ -133,7 +133,7 @@ function OnLoad() {
                         <div class="col-md-4 col-sm-6">
                             <div class="blog-post">
                                 <div class="blog-thumb">
-                                  <a href="/createList"> <img src="/images/contacts-icon.png" alt="" /></a>
+                                  <a href="/createList"> <img src="../images/contacts-icon.png" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <div class="content-show">
@@ -147,7 +147,7 @@ function OnLoad() {
             </div>
                           <!--  <div class="blog-post">
                                <div class="contact-thumb">
-                                   <img src="/images/lists_icon.jpg" alt="" />
+                                   <img src="../images/lists_icon.jpg" alt="" />
                                                                   </div>
                                 <div class="contacts-content">
                                     <div class="content-show">
@@ -156,7 +156,7 @@ function OnLoad() {
                                     </div>                                   
                                 </div>
                                 <div class="contact-thumb">
-                                   <img src="/images/contacts-icon.png" alt="">
+                                   <img src="../images/contacts-icon.png" alt="">
                                                                   </div>
                                 <div class="contacts-content">
                                     <div class="content-show">
@@ -177,6 +177,7 @@ function OnLoad() {
     </div>
        <thead>
         <tr role="row" style="color: black;">
+         <th colspan="1" rowspan="1" aria-controls="list_contacts" tabindex="0" role="columnheader" style="width: 0px;" class="center check_box_wrapper sorting_asc"></th>
         <th colspan="1" rowspan="1" aria-controls="list_contacts" tabindex="0" role="columnheader" class="sorting" style="width: 20px; max-width: 20px; text-align: center;">S.No</th>
         <th colspan="1" rowspan="1" aria-controls="list_contacts" tabindex="0" role="columnheader" class="sorting" style="width: 20px; max-width: 20px; text-align: center">Name</th>
         <th colspan="1" rowspan="1" aria-controls="list_contacts" tabindex="0" role="columnheader" class="sorting" style="width: 20px; max-width: 20px; text-align: center">View</th>
@@ -194,6 +195,7 @@ function OnLoad() {
 		<tr class="odd">
 		    <!--<td class="">-->
 		    <!--<input id=" " class="contact_checkbox" data-id=" " type="checkbox"></td>-->
+		    <td style="text-align: center"><input type="checkbox" name="filter"></a></td>
 		    <td style="text-align: center"><span style="font-weight: bold;"><%=count+1%></span></a></td>
 		    <td style="text-align: center"><%=curObj.groupName%></a></td>
 		    
