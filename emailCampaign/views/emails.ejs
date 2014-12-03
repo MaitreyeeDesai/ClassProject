@@ -39,6 +39,11 @@ function OnLoad() {
           var e = document.getElementById(id);
            e.style.display = 'block';
     }
+    
+    function setIndustryValue()
+    {
+    	var ind=$("#selectedInd").val();
+    }
  
 </script>
 
@@ -164,7 +169,7 @@ function OnLoad() {
          
 
          
-        <select name="Industry" size="1" onchange="">
+        <select name="Industry" size="1" onchange="setIndustryValue()" id="selectedInd">
          <% for(var count=0;count < industries.length; count++)  { 
 	   		var curObj=industries[count];
 	   		var isSelected="";
@@ -182,11 +187,24 @@ function OnLoad() {
                   
     </div>
     <div class="actions" style="display: block; overflow: auto;">
-          <a href="emails.ejs" class="unaction">Cancel</a> <a href="CreateEmail.ejs" class="large yellow button action">Start to Build Email &nbsp; </a>
+    		
+          <a href="/email" class="unaction">Cancel</a> <a href="/createEmailPage" class="large yellow button action" id="target_href">Start to Build Email &nbsp; </a>
     </div>
   </div></div></div>
 <div class="alert-box error" id="errorMessage"><span id="error-span"></span></div>
 	<div class="alert-box success" id="successMessage"><span id="success-span"></span></div>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script>
+	function setIndustryValue()
+    {
+    	var ind=$("#selectedInd").val();
+    	var url='/createEmailPage?industry='+ind;
+    	$("#target_href").attr('href',url);
+    }
+ 
+	</script>
 </body>
 </html>
 

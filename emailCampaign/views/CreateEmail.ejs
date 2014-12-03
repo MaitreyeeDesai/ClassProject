@@ -69,19 +69,7 @@
        var e = document.getElementById(id);
            e.style.display = 'block';
     }
- $(function() {
-            $( "#selectable-7" ).selectable({
-               selected: function() {
-                  RecipientId.value="";
-                  $( ".ui-selected", this ).each(function() {
-                     var index = $( "#selectable-7 li" ).index( this );
-                 //  result.append( " #" + ( index + 1 ) );
-                   RecipientId.value+=(index+1)+ "";
 
-                  });
-               }
-            });
-         });
 </script>
 
             <header>
@@ -221,13 +209,17 @@
  
 <div class="jedit_bottom_bar">  <div style="width: 100%; text-align: right; padding-top: 10px;">
   <a href="/email" style="font-size: medium;">Cancel</a> 
-  <input class="fileUpload medium yellow button" name="commit" style="margin-right: 20px; width:12%; font-size: 15px;margin-left: 2%;" type="submit" value="Send" onclick=""> 
+  <input class="fileUpload medium yellow button" name="commit" style="margin-right: 20px; width:12%; font-size: 15px;margin-left: 2%;" type="submit" value="Send" onclick="">
+   
 </div></div>
-
+<input type="hidden" value="<%=industry%>" id="industrySelected">
 </form></div>
 
 
 </div>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   <script type="text/javascript">
    CKEDITOR.replace( 'Email_Content' );
    progVal.innerHTML=progId.value;
@@ -238,34 +230,45 @@
 
      }
 
-    function addContact() {
-      
-     var y = document.forms["ContactsForm"]["ContactConnection"].value;
-   if (y == null || y == "") {
-       
-ConnectionId.style.border="thin solid #ac0000";
-ConnectionError.style.display='block';
-       
-    }
-     else {
-      ConnectionId.style.border="none";
-      ConnectionError.style.display='none';
-    }
+     $(function() {
+            $( "#selectable-7" ).selectable({
+               selected: function() {
+                  RecipientId.value="";
+                  $( ".ui-selected", this ).each(function() {
+                     var index = $( "#selectable-7 li" ).index( this );
+                 //  result.append( " #" + ( index + 1 ) );
+                   RecipientId.value+=(index+1)+ "";
 
-    var z = document.forms["ContactsForm"]["manualEntry"].value;
- if (z == null || z == "") {
-       
-manualId.style.border="thin solid #ac0000";
-manualError.style.display='block';
-       
-    }
-     else {
-      manualId.style.border="none";
-      manualError.style.display='none';
-    }
-    
-
-    }
+                  });
+               }
+            });
+            
+             $("#list_contact_conection").keyup(function() {
+				var inputSearch = $(this).val();
+				var industry=$("#industrySelected").val();
+				if(inputSearch.indexOf(' ') >=0)
+				{
+					var dataString = 'subject=' + inputSearch+'&industry='+industry;
+					if (inputSearch != '') {
+						$.ajax({
+							dataType : "JSON",
+							type : "POST",
+							url : "http://localhost:3000/getSubjectSuggestions",
+							data : dataString,
+							cache : false,
+							success : function(data) {
+								$("#suggest").text(data.sugg);
+								$("#progId").val(data.percent);
+								$("#progVal").html(data.percent+"%");
+							}
+						});
+					}				
+				}
+				
+				return false;
+			});
+            
+         });
     
   </script>
 

@@ -6,7 +6,7 @@ exports.initializeDatabaseConnectionPool = function() {
 	pool = mysql.createPool({
 		host : 'localhost',
 		user : 'root',
-		password : 'Sindhu@7',
+		password : 'Welcome1',
 		database : 'emailcampaign'
 	});
 
