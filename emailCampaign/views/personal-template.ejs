@@ -49,6 +49,10 @@ function OnLoad() {
      function makeVisible(id) {
           var e = document.getElementById(id);
            e.style.display = 'block';
+               }
+ function setIndustryValue()
+    {
+    	var ind=$("#selectedInd").val();
     }
  
 </script>
@@ -223,13 +227,46 @@ function OnLoad() {
 				 <tr>
 					  <td style="font-size: 1px; height: 10px; line-height: 1px;" height="10" colspan="4"><img src="images/spacer.gif" alt="space" width="25" height="1"></td>
 				  </tr>
-				  <input type="submit" value="Send" class="medium green1 buttonSign"> 
+				  <input type="submit" value="Send" class="medium green1 buttonSign" onclick="makeVisible('dabox_overlay')"> 
 				</table><!-- body -->
 				
 		  	</td>
 		</tr>
     </table>
-    
+        
     </form>
+     <div id="dabox_overlay" style="display: none;">
+
+<div id="dabox" class="open" style="opacity: 1; width: 500px; height: 381px; margin-top: -190.5px; margin-left: -250px; display:block">
+  <div id="new_email_questions" data-width="500" data-use="/emails/new" class="daboxable">
+
+    <form name="myform"><div align="center">
+    <h1>Email Details<a href="#" title="Close" class="dabox_exit unaction"><i class="icon-remove"></i></a></h1>
+
+    <div class="content" style="display: block; overflow: auto; height: 226px;">
+      <h2>A Little Bit of Info</h2>
+      <p>To help us give you the best suggestions when creating your email please answer these few questions &amp; start building!</p>
+          <h4>What industry does this email belong to?</h4>
+
+         
+
+         
+        <select name="Industry" size="1" onchange="setIndustryValue()" id="selectedInd">
+         <% for(var count=0;count < industries.length; count++)  { 
+	   		var curObj=industries[count];
+	   		var isSelected="";
+	   		if(count==0)
+	   		{
+	   			isSelected="selected";
+	   		}
+	  	
+	%>
+	<option value="<%=curObj.id%>" selected="<%=isSelected%>"><%=curObj.industry_name%> </option>
+	<% }%>
+	</select>
+
+     </div>
+                  
+    </div>
   </body>
 </html>
