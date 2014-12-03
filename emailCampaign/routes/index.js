@@ -482,7 +482,7 @@ exports.sendTemplateEmail = function(req, res) {
 			});		
 			if(selectedTemplateType==1)
 			{
-					//classic
+					//personal
 				var mailOptions = {
 						from : senderEmail, // sender address
 						to : emails, // list of receivers separated by commas
@@ -498,7 +498,7 @@ exports.sendTemplateEmail = function(req, res) {
 			}
 			if(selectedTemplateType==2)
 			{
-				//personal
+				//classic
 				var mailOptions = {
 						from : senderEmail, // sender address
 						to : emails, // list of receivers separated by commas
