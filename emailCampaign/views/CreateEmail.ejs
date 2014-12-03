@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="../css/contacts.css">
         <link rel="stylesheet" href="../css/emails.css"> 
         <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
-         <script src="js/emails.js"></script>
+         <script src="../js/emails.js"></script>
          <script src="../ckeditor/ckeditor.js"></script>
 
           <style>
@@ -195,9 +195,9 @@
       The subject of your message is the single, most important aspect to getting your email opened and read. Please use our guide provided to maximize the effectiveness of your subject line(s).<br>
     
     <p>
-      <input id="list_contact_conection" required name="ContactConnection" size="30" type="text" style="width: 90%;">
-      
-      <div id='analysis' class="txtarea">      
+      <input id="subject" required name="subject" size="30" type="text" style="width: 90%;">
+      </p>
+      <div id="analysis" class="txtarea" style="position: absolute; display:none">      
       <p align="left" style="color: green ;font-size:20; margin-top:1">Subject analysis</p>     
       <p align="left">Warnings:<p style="color:white; margin-top:1">
        Make your subject longer.(Ideal length is 38 chars.)</p></p>
@@ -205,19 +205,24 @@
 
       </div>
       
-   <div style="";> <progress id="progId" style="margin-left: 92%; margin-top: -2%; float:left"value="29" max="100">
-      </progress> <div id="progVal" style="float:right"></div>
+   <div style="";> <progress id="progId" style="margin-left: 92%; margin-top: -2%; float:left"value="29" max="100" 
+    onmouseover="a=document.getElementById('progVal');
+              a.innerHTML=this.value+'%'; 
+              a.style.display='block'
+              analysis.style.display='block'"
+ onmouseout="document.getElementById('progVal').style.display='none'
+ document.getElementById('analysis').style.display='none'">
+      </progress> 
+      <div id="progVal" style=" margin-left: 81%; position:absolute;"></div>
     </div>
-</p>
+<!--</p>-->
      
     </div>
     <div class="cleared"></div>
   </div>
-  
-  
+    
      <textarea style="margin: -15% 5em; border: 1px solid #CACCE0;"  name="EmailBody" cols="40" id="Email_Content" required placeholder="Type Email here" rows="8"></textarea>
   
-
  
 <div class="jedit_bottom_bar">  <div style="width: 100%; text-align: right; padding-top: 10px;">
   <a href="CreateEmail.ejs" style="font-size: medium;">Cancel</a> 
@@ -230,14 +235,7 @@
 </div>
   <script type="text/javascript">
    CKEDITOR.replace( 'Email_Content' );
-   progVal.innerHTML=progId.value;
-     function displayFileName(fileName)
-     {
-      var fileName = document.forms["ContactsForm"]["list[document]"].value;
-      FileNameId.innerHTML=fileName;
-
-     }
-
+  
     function addContact() {
       
      var y = document.forms["ContactsForm"]["ContactConnection"].value;
