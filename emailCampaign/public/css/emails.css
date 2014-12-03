@@ -190,9 +190,8 @@ background:url(images/arrows.png) 0 center no-repeat;
 border:0; 
 padding:10px;  
 color:red; 
-background-color:black;
+background-color: black;
 border:solid 1px #ccc; 
-margin: 0 0 10px 80%;
 width:250px;
 font-size: 15;
 
