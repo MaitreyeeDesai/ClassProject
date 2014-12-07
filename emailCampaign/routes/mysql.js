@@ -4,7 +4,7 @@ var pool;
 
 exports.initializeDatabaseConnectionPool = function() {
 	pool = mysql.createPool({
-		host : 'localhost',
+		host : 'emailcampaign.cafwmc855han.us-west-2.rds.amazonaws.com',
 		user : 'root',
 		password : 'Welcome1',
 		database : 'emailcampaign'

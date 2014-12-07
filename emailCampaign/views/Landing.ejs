@@ -45,22 +45,22 @@
                             <div class="col-md-6"> 
                             <div class="button-like">
                           <!--  <a href="#" class="medium green1 buttonSign" onclick="toggle_visibility('form')">Log In</a>-->
-                             <button class="medium green1 buttonSign" type="submit" onclick="toggle_visibility('form')" >LOGIN
+                             <button class="medium green1 buttonSign" type="submit" onclick="postLoginForm()" >LOGIN
                             </div>
                             </div>
                         </div>
                     </div>
                 </div>
                  <div class="login-form" id="form">
-     <form accept-charset="UTF-8" action="/Login" id="new_session" method="post" novalidate="novalidate"><input name="utf8" type="hidden" value="?">
+     <form accept-charset="UTF-8" action="/Login" id="loginForm" method="post" novalidate="novalidate"><input name="utf8" type="hidden" value="?">
                <div class="eo_signup_field">
                 <div class="tag">Email</div>
-                <div class="field"><input id="email" name="email" type="email">
+                <div class="field"><input id="email" name="email" type="email" value="mdesai@gmail.com">
                 </div>
             </div>
             <div class="eo_signup_field">
                     <div class="tag">Password</div>
-                    <div class="field"><input id="password" name="password" type="password">
+                    <div class="field"><input id="password" name="password" type="password" value="admin">
                     </div>
                 </div>
                 <div ><button class="eo-button" type="submit" style="margin:10px;text-align: center;">Log In</button></div>
@@ -285,7 +285,14 @@
         <script src="../js/vendor/jquery.gmap3.min.js"></script>
         <script src="../js/plugins.js"></script>
         <script src="../js/main.js"></script>
-
+	<script>
+		function postLoginForm()
+		{
+		
+			$("#loginForm").submit();
+		
+		}
+	</script>
 
     </body>
 </html>

@@ -140,7 +140,7 @@ exports.getSignInPage = function(req, res) {
 	});
 };
 exports.getCreateListView = function(req, res) {
-	res.render('CreateList', {
+	res.render('createList', {
 		title : 'Email campaign'
 	});
 };
