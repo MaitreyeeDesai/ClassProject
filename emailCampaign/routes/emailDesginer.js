@@ -34,7 +34,7 @@ exports.saveEmailForUser = function(req, res) {
 	var newEmailData = {
 		ownerId : ownedId,
 		emailString : email,
-		subjectLine:subjectL
+		subjectLine : subjectL
 
 	};
 	mysql
@@ -145,9 +145,9 @@ exports.editEmail = function(req, res) {
 exports.sendEmail = function(req, res) {
 	var data;
 	var responseString;
-	var emailType=req.param("emailType");
+	var emailType = req.param("emailType");
 	var subject = req.param("subject");
-	var ind=req.param("selectedIndustry");
+	var ind = req.param("selectedIndustry");
 	if (subject == null || typeof (subject) == 'undefined') {
 		data = {
 			errorCode : 101,
@@ -175,93 +175,77 @@ exports.sendEmail = function(req, res) {
 		res.send(responseString);
 	}
 	// get the contacts for the group
-	var getC="Select * from contacts where groupId="+addressTo;
-	mysql.fetchData(function(err, results) {
-		if (err) {
-			throw err;
-		} else {
-			var emails=results[0].email;
-			for(var count=0; count < results.length;count++)
-				{
-					if(count==0)
-						{
-							continue;
-						}
-					else
-						{
-						emails=emails+","+results[count].email;
-						}
-					
-				}
-			
-			var userObject = req.session.user;
-			var senderEmail = userObject.email;
-			var transporter = nodemailer.createTransport({
-				service : 'gmail',
-				auth : {
-					user : 'maitreyeesunildesai@gmail.com',
-					pass : 'msuniapplications'
-				}
-			});		
-				
-			var mailOptions = {
-						from : senderEmail, // sender address
-						to : emails, // list of receivers separated by commas
-						subject : subject, // Subject line
-						html : email
-
-					};			
-				transporter.sendMail(
-							mailOptions,
-							function(error, info) {
-								if (error) {
-									console.log(error);
-									data = {
-										errorCode : 101,
-										message : "An error occured while sending the email. Please try again."
-									};
-									responseString = JSON.stringify(data);
-									res.send(responseString);
+	var getC = "Select * from contacts where groupId=" + addressTo;
+	mysql
+			.fetchData(
+					function(err, results) {
+						if (err) {
+							throw err;
+						} else {
+							var emails = results[0].email;
+							for (var count = 0; count < results.length; count++) {
+								if (count == 0) {
+									continue;
 								} else {
-									
-									var newEmail={
-											
-											ownerId:userObject.id,
-											emailString:email,
-											subjectLine:subject,
-											industry:ind,
-											sentTo:addressTo
-									};
-									mysql.insertData(function(err, results) {
-												if (err) {
-													console.log("error while saving email.");
-													data = {
-														errorCode : 101,
-														message : "There was some error while saving your email please try again."
-													};
-													responseString = JSON.stringify(data);
-													res.send(responseString);
-												} else {
-													res.redirect("/email");
-												}
+									emails = emails + ","
+											+ results[count].email;
+								}
 
-											}, newEmail, "emails");
-									
-									
+							}
+
+							var userObject = req.session.user;
+							var senderEmail = userObject.email;
+							var transporter = nodemailer.createTransport({
+								service : 'gmail',
+								auth : {
+									user : 'maitreyeesunildesai@gmail.com',
+									pass : 'msuniapplications'
 								}
 							});
 
-		}
-	}, getC);
-	
-	
+							var mailOptions = {
+								from : senderEmail, // sender address
+								to : emails, // list of receivers separated
+												// by commas
+								subject : subject, // Subject line
+								html : email
 
+							};
+							var newEmail = {
+
+								ownerId : userObject.id,
+								emailString : email,
+								subjectLine : subject,
+								industry : ind,
+								sentTo : addressTo
+							};
+							mysql.insertData(function(err, results) {
+												if (err) {
+													console.log("error while saving email.");
+													
+												} else {
+													transporter.sendMail(mailOptions,function(error,info) {
+																		if (error) {
+																			console.log(error);
+
+																		} else {
+																			console.log("email sent");
+
+																		}
+																	});
+												}
+
+											}, newEmail, "emails");
+							res.redirect("/email");
+
+						}
+					}, getC);
 
 };
 
 function checkSubjectEffectivity(subjectLine, keywords) {
 	var keywordArray = keywords.split(",");
-	subjectLine=subjectLine.trim().toLowerCase();
+	subjectLine = subjectLine.trim().toLowerCase();
 	var count = 0;
 	for (var counter = 0; counter < keywordArray.length; counter++) {
 		var word = keywordArray[counter].toLowerCase();
@@ -269,7 +253,7 @@ function checkSubjectEffectivity(subjectLine, keywords) {
 			count = count + 1;
 		}
 	}
-	var percent=(count/keywordArray.length)*100;
+	var percent = (count / keywordArray.length) * 100;
 	return percent;
 }
 
@@ -284,12 +268,15 @@ exports.checkEmailSubjectLine = function(req, res) {
 			throw err;
 		} else {
 			var reqObj = results[0];
-			var percentEffectivity= checkSubjectEffectivity(subject,reqObj.keywords);
+			var percentEffectivity = checkSubjectEffectivity(subject,
+					reqObj.keywords);
 			var keywordArray = reqObj.keywords.split(",");
-			var suggestion="To inscrease your clicks use words like: "+ keywordArray[0]+","+keywordArray[1]+", "+keywordArray[2];
-			var resultObj={
-					sugg:suggestion,
-					percent:percentEffectivity
+			var suggestion = "To inscrease your clicks use words like: "
+					+ keywordArray[0] + "," + keywordArray[1] + ", "
+					+ keywordArray[2];
+			var resultObj = {
+				sugg : suggestion,
+				percent : percentEffectivity
 			};
 			responseString = JSON.stringify(resultObj);
 			res.send(responseString);
@@ -298,13 +285,12 @@ exports.checkEmailSubjectLine = function(req, res) {
 
 };
 
-
 exports.sendTemplateEmail = function(req, res) {
 	var data;
 	var responseString;
-	var templateType=req.param("templateType");
+	var templateType = req.param("templateType");
 	var subject = req.param("subject");
-	var ind=req.param("selectedIndustry");
+	var ind = req.param("selectedIndustry");
 	if (subject == null || typeof (subject) == 'undefined') {
 		data = {
 			errorCode : 101,
@@ -332,127 +318,119 @@ exports.sendTemplateEmail = function(req, res) {
 		res.send(responseString);
 	}
 	// get the contacts for the group
-	var getC="Select * from contacts where groupId="+addressTo;
-	mysql.fetchData(function(err, results) {
-		if (err) {
-			throw err;
-		} else {
-			var emails=results[0].email;
-			for(var count=0; count < results.length;count++)
-				{
-					if(count==0)
-						{
-							continue;
-						}
-					else
-						{
-						emails=emails+","+results[count].email;
-						}
-					
-				}
-			
-			var userObject = req.session.user;
-			var senderEmail = userObject.email;
-			var transporter = nodemailer.createTransport({
-				service : 'gmail',
-				auth : {
-					user : 'maitreyeesunildesai@gmail.com',
-					pass : 'msuniapplications'
-				}
-			});		
-			if(templateType==1)
-			{
-					//classic
-				var mailOptions = {
-						from : senderEmail, // sender address
-						to : emails, // list of receivers separated by commas
-						subject : subject, // Subject line
-						html : email,
-						attachments: [{
-					        filename: 'image.png',
-					        path: '/path/to/file',
-					        cid: 'unique@kreata.ee' //same cid value as in the html img src
-					    }]
-					};		
-				
-			}
-			if(templateType==2)
-			{
-				//personal
-				var mailOptions = {
-						from : senderEmail, // sender address
-						to : emails, // list of receivers separated by commas
-						subject : subject, // Subject line
-						html : email,
-						attachments: [{
-					        filename: 'image.png',
-					        path: '/path/to/file',
-					        cid: 'unique@kreata.ee' //same cid value as in the html img src
-					    }]
-					};		
-			
-			}
-			if(templateType==3)
-			{
-				//professional
-				var mailOptions = {
-						from : senderEmail, // sender address
-						to : emails, // list of receivers separated by commas
-						subject : subject, // Subject line
-						html : email,
-						attachments: [{
-					        filename: 'image.png',
-					        path: '/path/to/file',
-					        cid: 'unique@kreata.ee' //same cid value as in the html img src
-					    }]
-					};			
-			
-			}
-				
-				transporter.sendMail(
-							mailOptions,
-							function(error, info) {
-								if (error) {
-									console.log(error);
-									data = {
-										errorCode : 101,
-										message : "An error occured while sending the email. Please try again."
-									};
-									responseString = JSON.stringify(data);
-									res.send(responseString);
+	var getC = "Select * from contacts where groupId=" + addressTo;
+	mysql
+			.fetchData(
+					function(err, results) {
+						if (err) {
+							throw err;
+						} else {
+							var emails = results[0].email;
+							for (var count = 0; count < results.length; count++) {
+								if (count == 0) {
+									continue;
 								} else {
-									
-									var newEmail={
-											
-											ownerId:userObject.id,
-											emailString:email,
-											subjectLine:subject,
-											industry:ind,
-											sentTo:addressTo
-									};
-									mysql.insertData(function(err, results) {
-												if (err) {
-													console.log("error while saving email.");
-													data = {
-														errorCode : 101,
-														message : "There was some error while saving your email please try again."
-													};
-													responseString = JSON.stringify(data);
-													res.send(responseString);
-												} else {
-													res.redirect("/email");
-												}
+									emails = emails + ","
+											+ results[count].email;
+								}
 
-											}, newEmail, "emails");
-									
-									
+							}
+
+							var userObject = req.session.user;
+							var senderEmail = userObject.email;
+							var mailOption;
+							var transporter = nodemailer.createTransport({
+								service : 'gmail',
+								auth : {
+									user : 'maitreyeesunildesai@gmail.com',
+									pass : 'msuniapplications'
 								}
 							});
+							if (templateType == 1) {
+								// classic
+								 mailOption = {
+									from : senderEmail, // sender address
+									to : emails, // list of receivers
+													// separated by commas
+									subject : subject, // Subject line
+									html : email,
+									attachments : [ {
+										filename : 'image.png',
+										path : '/path/to/file',
+										cid : 'unique@kreata.ee' // same cid
+																	// value as
+																	// in the
+																	// html img
+																	// src
+									} ]
+								};
 
-		}
-	}, getC);
-	
-	
+							}
+							if (templateType == 2) {
+								// personal
+								 mailOption = {
+									from : senderEmail, // sender address
+									to : emails, // list of receivers
+													// separated by commas
+									subject : subject, // Subject line
+									html : email,
+									attachments : [ {
+										filename : 'image.png',
+										path : '/path/to/file',
+										cid : 'unique@kreata.ee' // same cid
+																	// value as
+																	// in the
+																	// html img
+																	// src
+									} ]
+								};
 
+							}
+							if (templateType == 3) {
+								// professional
+								 mailOption = {
+									from : senderEmail, // sender address
+									to : emails, // list of receivers
+													// separated by commas
+									subject : subject, // Subject line
+									html : email,
+									attachments : [ {
+										filename : 'image.png',
+										path : '/path/to/file',
+										cid : 'unique@kreata.ee' // same cid
+																	// value as
+																	// in the
+																	// html img
+																	// src
+									} ]
+								};
+
+							}
+							var newEmail = {
+
+									ownerId : userObject.id,
+									emailString : "template email",
+									subjectLine : subject,
+									industry : ind,
+									sentTo : addressTo
+								};
+								mysql.insertData(function(err,results) {
+													if (err) {
+														console.log("error while saving email.");
+														
+													} else {
+														transporter.sendMail(mailOption,function(error, info) {
+																	if (error) {
+																		console.log(error);
+																		} else {																	}
+																});
+
+														
+													}
+
+												},newEmail,"emails");
+								res.redirect("/email");
+						}
+					}, getC);
 
 };
